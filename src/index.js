@@ -11,7 +11,6 @@ import {loadCourses} from './actions/courseActions'; // IMPORT LOADCOURSES FUNCT
 import {loadArticles} from './actions/articleActions';
 import {loadWarehouses} from './actions/warehouseActions';
 import {loadLocations} from './actions/locationActions';
-import {loadLocationTags} from './actions/locationTagActions';
 import {loadInventories} from './actions/inventoryActions';
 import './styles/styles.css'; //Webpack can import CSS files too!
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -22,7 +21,6 @@ store.dispatch(loadAuthors());
 store.dispatch(loadArticles());
 store.dispatch(loadWarehouses());
 store.dispatch(loadLocations());
-store.dispatch(loadLocationTags());
 store.dispatch(loadInventories());
 
 render(

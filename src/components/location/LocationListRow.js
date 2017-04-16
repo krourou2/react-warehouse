@@ -7,6 +7,7 @@ const LocationListRow = ({location}) => {
       <td><Link to={'location/:' + location.locationId}>{location.locationId}</Link></td>
       <td>{location.warehouseId}</td>
       <td>{location.locationType}</td>
+      <td>{location.tag}</td>
       <td>{location.description}</td>
     </tr>
   );

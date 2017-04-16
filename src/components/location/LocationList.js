@@ -9,6 +9,7 @@ const LocationList = ({locations}) => {
           <th>Location ID</th>
           <th>Warehouse ID</th>
           <th>Location Type</th>
+          <th>Tag</th>
           <th>Description</th>
         </tr>
       </thead>

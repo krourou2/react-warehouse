@@ -12,6 +12,7 @@ import ManageWarehousePage from './components/warehouse/ManageWarehousePage';
 import LocationsPage from './components/location/LocationsPage';
 import InventoryPage from './components/inventory/InventoryPage';
 import ManageInventoryPage from './components/inventory/ManageInventoryPage';
+import ManageLocationPage from './components/location/ManageLocationPage';
 
 export default (
   <Route path="/" component={App}>
@@ -30,5 +31,7 @@ export default (
     <Route path="warehouse" component={ManageWarehousePage}/>
     <Route path="warehouse/:id" component={ManageWarehousePage} />
     <Route path="locations" component={LocationsPage}/>
+    <Route path="location" component={ManageLocationPage}/>
+    <Route path="location/:id" component={ManageLocationPage}/>
   </Route>
 );

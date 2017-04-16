@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as inventoryActions from '../../actions/courseActions';
+import * as inventoryActions from '../../actions/inventoryActions';
 import InventoryForm from './InventoryForm';
 
 class ManageInventoryPage extends React.Component {
@@ -49,11 +49,10 @@ class ManageInventoryPage extends React.Component {
     return (
       <InventoryForm
         inventory={this.state.inventory}
-        onChange={this.updateInventoryState}
         onSave={this.saveInventory}
-        course={this.state.inventory}
-        errors={this.state.errors}
+        onChange={this.updateInventoryState}
         saving={this.state.saving}
+        errors={this.state.errors}
       />
     );
   }
@@ -70,7 +69,7 @@ ManageInventoryPage.contextTypes = {
 };
 
 function getInventoryById(inventories, id) {
-  const inventory = inventories.filter(course => course.id == id);
+  const inventory = inventories.filter(inventory => inventory.inventory_id == id);
   if (inventory.length) return inventory[0]; //since filter returns an array, have to grab the first.
   return null;
 }
@@ -78,10 +77,10 @@ function getInventoryById(inventories, id) {
 function mapStateToProps(state, ownProps) {
   const inventoryId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
 
-  let inventory = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
+  let inventory = {inventory_id: '', warehouse_id: '', article_id: ''};
 
   if (inventoryId && state.inventories.length > 0) {
-    inventory = getInventoryById(state.courses, inventoryId);
+    inventory = getInventoryById(state.inventories, inventoryId);
   }
 
   return {
