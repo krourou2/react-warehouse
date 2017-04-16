@@ -8,13 +8,6 @@ const WarehouseForm = ({warehouse, onSave, onChange, saving, errors}) => {
       <h1>Manage Warehouse</h1>
 
       <TextInput
-        name="warehouseId"
-        label="Warehouse ID"
-        value={warehouse.warehouseId}
-        onChange={onChange}
-        errors={errors.title}/>
-
-      <TextInput
         name="warehouseNumber"
         label="Warehouse Number"
         value={warehouse.warehouseNumber}
@@ -22,9 +15,9 @@ const WarehouseForm = ({warehouse, onSave, onChange, saving, errors}) => {
         errors={errors.title}/>
 
       <TextInput
-        name="archiveLength"
-        label="Archive Length"
-        value={warehouse.archiveLength}
+        name="warehouseName"
+        label="Warehouse Number"
+        value={warehouse.warehouseName}
         onChange={onChange}
         errors={errors.title}/>
 

@@ -8,7 +8,6 @@ const WarehouseList = ({warehouses}) => {
       <tr>
         <th>Warehouse Number</th>
         <th>Warehouse Name</th>
-        <th>Archive Length</th>
       </tr>
       </thead>
       <tbody>

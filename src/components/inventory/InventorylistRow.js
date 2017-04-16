@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
 const InventoryListRow = ({inventory}) => {
+
   return (
     <tr>
       <td><Link to={'/inventory/:' + inventory.inventory_id}>{inventory.inventory_id}</Link></td>
@@ -12,7 +13,7 @@ const InventoryListRow = ({inventory}) => {
 };
 
 InventoryListRow.propTypes = {
-  inventory: PropTypes.object.isRequired
+  inventory: React.PropTypes.object.isRequired
 };
 
 export default InventoryListRow;

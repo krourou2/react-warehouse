@@ -14,14 +14,6 @@ const ArticleForm = ({article, onSave, onChange, saving, errors}) => {
       />
 
       <TextInput
-        name="articleId"
-        label="Article ID"
-        value={article.article_id}
-        onChange={onChange}
-        error={errors.title}
-      />
-
-      <TextInput
         name="manufacturer"
         label="Manufacturer"
         value={article.manufacturer}

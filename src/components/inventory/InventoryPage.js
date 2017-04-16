@@ -17,7 +17,7 @@ class InventoryPage extends React.Component {
     browserHistory.push('/inventory');
   }
 
-  render() {
+  render () {
     const {inventories} = this.props;
 
     return(
@@ -37,6 +37,7 @@ class InventoryPage extends React.Component {
 //** PROP TYPE VALIDATION **//
 InventoryPage.propTypes = {
   inventories: React.PropTypes.array.isRequired,
+  articles: React.PropTypes.array.isRequired,
   actions: React.PropTypes.object.isRequired
 };
 

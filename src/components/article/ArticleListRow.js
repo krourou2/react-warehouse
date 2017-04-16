@@ -5,7 +5,6 @@ const ArticleListRow = ({article}) => {
   return (
     <tr>
       <td><Link to={'/article/:' + article.article_id}>{article.universal_product_code}</Link></td>
-      <td>{article.article_id}</td>
       <td>{article.manufacturer}</td>
       <td>{article.description}</td>
     </tr>

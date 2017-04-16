@@ -6,7 +6,6 @@ const WarehouseListRow = ({warehouse}) => {
     <tr>
       <td><Link to={'/warehouse/:' + warehouse.warehouseId}>{warehouse.warehouseNumber}</Link></td>
       <td>{warehouse.warehouseName}</td>
-      <td>{warehouse.archiveLength}</td>
     </tr>
   );
 };

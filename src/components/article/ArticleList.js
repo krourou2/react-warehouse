@@ -7,7 +7,6 @@ const ArticleList = ({articles}) => {
       <thead>
       <tr>
         <th>UPC</th>
-        <th>Article ID</th>
         <th>Manufacturer</th>
         <th>Description</th>
       </tr>

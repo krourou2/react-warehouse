@@ -3,8 +3,8 @@ import inventoryApi from '../api/mockInventoryApi'; //import courseAPI from mock
 import {beginAjaxCall} from './ajaxStatusActions';
 
 //** ACTION CREATOR **//
-export function loadInventorySuccess(inventory){
-  return { type: types.CREATE_INVENTORY_SUCCESS, inventory: inventory};
+export function loadInventorySuccess(inventories){
+  return { type: types.LOAD_INVENTORY_SUCCESS, inventories: inventories};
 }
 
 export function updateInventorySuccess(inventory){

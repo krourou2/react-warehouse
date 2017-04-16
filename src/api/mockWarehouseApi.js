@@ -5,22 +5,19 @@ import delay from './delay';
 // All calls return promises.
 const warehouses = [
   {
-    warehouseId: 1001,
+    warehouseId: "1001",
     warehouseNumber: "Schroeter01",
-    warehouseName: "Schroeter Auto Supply",
-    archiveLength: 1
+    warehouseName: "Schroeter Auto Supply"
   },
   {
-    warehouseId: 1002,
+    warehouseId: "1002",
     warehouseNumber: "PapaJohn01",
-    warehouseName: "Papa Johns Distrobution",
-    archiveLength: 5
+    warehouseName: "Papa Johns Distrobution"
   },
   {
-    warehouseId: 1003,
+    warehouseId: "1003",
     warehouseNumber: "CalahanAuto01",
-    warehouseName: "Calahan Auto Parts",
-    archiveLength: 3
+    warehouseName: "Calahan Auto Parts"
   }
 ];
 
