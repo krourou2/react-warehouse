@@ -48,7 +48,7 @@ class WarehouseApi {
       setTimeout(() => {
         //simulate server-side validation
         const minWarehouseNameLength = 1;
-        if (warehouse.name.length < minWarehouseNameLength) {
+        if (warehouse.warehouseName.length < minWarehouseNameLength) {
           reject(`Title must be at least ${minWarehouseNameLength} characters.`);
         } else {
           //Just simulating creation here.
