@@ -11,7 +11,7 @@ const Header = ({loading}) => {
       {" | "}
       <Link to="/about" activeClassName="active">About</Link>
       {" | "}
-      <Link to="/inventory" activeClassName="active">Inventory</Link>
+      <Link to="/inventories" activeClassName="active">Inventory</Link>
       {" | "}
       <Link to="/articles" activeClassName="active">Articles</Link>
       {" | "}

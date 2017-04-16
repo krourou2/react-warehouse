@@ -23,8 +23,7 @@ const InventoryList = ({inventories}) => {
 };
 
 InventoryList.propTypes = {
-  inventories: React.PropTypes.array.isRequired,
-  articles: React.PropTypes.array.isRequired
+  inventories: React.PropTypes.array.isRequired
 };
 
 export default InventoryList;
