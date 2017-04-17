@@ -10,7 +10,7 @@ const InventoryForm = ({inventory, allTags, onSave, onChange, saving, errors}) =
       <TextInput
         name="inventoryId"
         label="Inventory ID"
-        value={inventory.inventory_id}
+        value={inventory.inventoryId}
         onChange={onChange}
         error={errors.inventory_id}
         disabled  />
@@ -18,27 +18,27 @@ const InventoryForm = ({inventory, allTags, onSave, onChange, saving, errors}) =
       <TextInput
         name="warehouseId"
         label="Warehouse ID"
-        value={inventory.warehouse_id}
+        value={inventory.warehouseId}
         onChange={onChange}
-        error={errors.warehouse_id}
+        error={errors.warehouseId}
         disabled  />
 
       <TextInput
         name="articleId"
         label="Article ID"
-        value={inventory.article_id}
+        value={inventory.articleId}
         onChange={onChange}
-        error={errors.article_id}
+        error={errors.articleId}
         disabled  />
 
       <SelectInput
         name="locationTag"
         label="Location Tag"
-        value={inventory.location_tag}
+        value={inventory.locationTag}
         defaultOption="Select Location Tag"
         options={allTags}
         onChange={onChange}
-        error={errors.location_tag}/>
+        error={errors.locationTag}/>
 
       <input
         type="submit"

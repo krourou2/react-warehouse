@@ -15,7 +15,7 @@ const InventoryList = ({inventories}) => {
       </thead>
       <tbody>
       {inventories.map(inventory =>
-        <InventoryListRow key={inventory.inventory_id}
+        <InventoryListRow key={inventory.inventoryId}
                           inventory={inventory}/>
       )}
       </tbody>

@@ -5,10 +5,10 @@ const InventoryListRow = ({inventory}) => {
 
   return (
     <tr>
-      <td><Link to={'/inventory/:' + inventory.inventory_id}>{inventory.inventory_id}</Link></td>
-      <td>{inventory.warehouse_id}</td>
-      <td>{inventory.article_id}</td>
-      <td>{inventory.location_tag}</td>
+      <td><Link to={'/inventory/:' + inventory.inventoryId}>{inventory.inventoryId}</Link></td>
+      <td>{inventory.warehouseId}</td>
+      <td>{inventory.articleId}</td>
+      <td>{inventory.locationTag}</td>
     </tr>
   );
 };

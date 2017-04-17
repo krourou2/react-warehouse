@@ -28,7 +28,7 @@ class ManageInventoryPage extends React.Component {
   componentWillReceiveProps(nextProps) {
     console.log("CWRP NEXT PROPS", nextProps.inventory);
     console.log("CWRP THIS PROPS", this.props.inventory);
-    if (nextProps.inventory && this.props.inventory.inventory_id !== nextProps.inventory.inventory_id) {
+    if (nextProps.inventory && this.props.inventory.inventoryId !== nextProps.inventory.inventoryId) {
       // Necessary to populate form when existing course is loaded directly.
       this.setState({inventory: Object.assign({}, nextProps.inventory)});
     }
@@ -83,13 +83,13 @@ ManageInventoryPage.contextTypes = {
 function getInventoryById(inventories, id) {
   console.log("INVENTORIES", JSON.stringify(inventories));
   console.log("ID", id);
-  return inventories.find(inventory => inventory.inventory_id === id);
+  return inventories.find(inventory => inventory.inventoryId === id);
 }
 
 function mapStateToProps(state, ownProps) {
   const inventoryId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
   console.log("INVENTORY ID", inventoryId);
-  let inventory = {inventory_id: '', warehouse_id: '', article_id: '', location_tag: ''};
+  let inventory = {inventoryId: '', warehouseId: '', articleId: '', locationTag: ''};
   if (inventoryId && state.inventories.length > 0) {
     inventory = getInventoryById(state.inventories, inventoryId);
   }
