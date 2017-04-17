@@ -8,7 +8,7 @@ export default function articleReducer(state = initialState.articles, action){
 
     case types.UPDATE_ARTICLE_SUCCESS:
       return [
-        ...state.filter(article => article.article_id !== action.article.article_id),
+        ...state.filter(article => article.articleId !== action.article.articleId),
         Object.assign({}, action.article)
       ];
 

@@ -20,7 +20,7 @@ class ManageArticlePage extends React.Component {
 
   // ran every once in a while to check if props have changed
   componentWillReceiveProps(nextProps) {
-    if (this.props.article.article_id != nextProps.article.article_id) {
+    if (this.props.article.articleId != nextProps.article.articleId) {
       // Necessary to populate form when existing course is loaded directly.
       this.setState({course: Object.assign({}, nextProps.article)});
     }
@@ -69,7 +69,7 @@ ManageArticlePage.contextTypes = {
 };
 
 function getArticleById(articles, id) {
-  const article = articles.filter(article => article.article_id == id);
+  const article = articles.filter(article => article.articleId == id);
   if (article.length) return article[0]; //since filter returns an array, have to grab the first.
   return null;
 }

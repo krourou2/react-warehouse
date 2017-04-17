@@ -13,7 +13,7 @@ const ArticleList = ({articles}) => {
       </thead>
       <tbody>
       {articles.map(article =>
-        <ArticleListRow key={article.article_id} article={article}/>
+        <ArticleListRow key={article.articleId} article={article}/>
       )}
       </tbody>
     </table>

@@ -6,32 +6,32 @@ import delay from './delay';
 
 const articles = [
   {
-    article_id: "1001",
-    account_id: "1001",
+    articleId: "1001",
+    accountId: "1001",
     manufacturer: "Apple",
     description: "Iphone 4 8gb White",
-    universal_product_code: "885909543274"
+    universalProductCode: "885909543274"
   },
   {
-    article_id: "1002",
-    account_id: "1001",
+    articleId: "1002",
+    accountId: "1001",
     manufacturer: "Apple",
     description: "Iphone 4 16gb White",
-    universal_product_code: "885909420445"
+    universalProductCode: "885909420445"
   },
   {
-    article_id: "1003",
-    account_id: "1001",
+    articleId: "1003",
+    accountId: "1001",
     manufacturer: "Apple",
     description: "Iphone 4 8gb Black",
-    universal_product_code: "885909543267"
+    universalProductCode: "885909543267"
   },
   {
-    article_id: "1004",
-    account_id: "1001",
+    articleId: "1004",
+    accountId: "1001",
     manufacturer: "Apple",
     description: "Iphone 4 16gb Black",
-    universal_product_code: "885909407576"
+    universalProductCode: "885909407576"
   }
 ];
 
@@ -42,7 +42,7 @@ function replaceAll(str, find, replace) {
 
 //This would be performed on the server in a real app. Just stubbing in.
 const generateId = (article) => {
-  return replaceAll(article.article_id, ' ', '-');
+  return replaceAll(article.articleId, ' ', '-');
 };
 
 class ArticleApi {
@@ -60,18 +60,18 @@ class ArticleApi {
       setTimeout(() => {
         // Simulate server-side validation
         const minArticleUPCLength = 1;
-        if (article.universal_product_code < minArticleUPCLength) {
+        if (article.universalProductCode < minArticleUPCLength) {
           reject(`Title must be at least ${minArticleUPCLength} characters.`);
         }
 
-        if (article.article_id) {
-          const existingCourseIndex = articles.findIndex(a => a.id == article.article_id);
+        if (article.articleId) {
+          const existingCourseIndex = articles.findIndex(a => a.id == article.articleId);
           articles.splice(existingCourseIndex, 1, article);
         } else {
           //Just simulating creation here.
           //The server would generate ids and watchHref's for new courses in a real app.
           //Cloning so copy returned is passed by value rather than by reference.
-          article.article_id = generateId(article);
+          article.articleId = generateId(article);
           articles.push(article);
         }
 
@@ -84,7 +84,7 @@ class ArticleApi {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const indexOfArticleToDelete = articles.findIndex(article => {
-          article.article_id == articleId;
+          article.articleId == articleId;
         });
         articles.splice(indexOfArticleToDelete, 1);
         resolve();

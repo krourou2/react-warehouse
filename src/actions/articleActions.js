@@ -32,7 +32,7 @@ export function saveArticle(article) {
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
     return articleApi.saveArticle(article).then(savedArticle => {
-      article.article_id ? dispatch(updateArticleSuccess(savedArticle)) : dispatch(createArticleSuccess(savedArticle));
+      article.articleId ? dispatch(updateArticleSuccess(savedArticle)) : dispatch(createArticleSuccess(savedArticle));
     }).catch(error => {
       throw(error);
     });

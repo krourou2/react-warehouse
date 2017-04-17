@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 const ArticleListRow = ({article}) => {
   return (
     <tr>
-      <td><Link to={'/article/:' + article.article_id}>{article.universal_product_code}</Link></td>
+      <td><Link to={'/article/:' + article.articleId}>{article.universalProductCode}</Link></td>
       <td>{article.manufacturer}</td>
       <td>{article.description}</td>
     </tr>

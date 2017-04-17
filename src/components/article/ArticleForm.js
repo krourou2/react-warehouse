@@ -8,7 +8,7 @@ const ArticleForm = ({article, onSave, onChange, saving, errors}) => {
       <TextInput
         name="uniqueProductCode"
         label="UPC"
-        value={article.universal_product_code}
+        value={article.universalProductCode}
         onChange={onChange}
         error={errors.title}
       />
