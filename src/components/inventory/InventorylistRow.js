@@ -8,6 +8,7 @@ const InventoryListRow = ({inventory}) => {
       <td><Link to={'/inventory/:' + inventory.inventory_id}>{inventory.inventory_id}</Link></td>
       <td>{inventory.warehouse_id}</td>
       <td>{inventory.article_id}</td>
+      <td>{inventory.location_tag}</td>
     </tr>
   );
 };

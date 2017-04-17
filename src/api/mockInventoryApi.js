@@ -5,14 +5,16 @@ import delay from './delay';
 // All calls return promises.
 const inventories = [
   {
-    inventory_id: 1001,
-    warehouse_id: 1001,
-    article_id: 1001
+    inventory_id: "1001",
+    warehouse_id: "1001",
+    article_id: "1001",
+    location_tag: "1A1"
   },
   {
-    inventory_id: 1002,
-    warehouse_id: 1001,
-    article_id: 1002
+    inventory_id: "1002",
+    warehouse_id: "1001",
+    article_id: "1002",
+    location_tag: "1A2"
   }
 ];
 

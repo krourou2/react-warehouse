@@ -48,6 +48,7 @@ class ManageInventoryPage extends React.Component {
   render() {
     return (
       <InventoryForm
+        allTags={this.props.tags}
         inventory={this.state.inventory}
         onSave={this.saveInventory}
         onChange={this.updateInventoryState}
@@ -60,6 +61,7 @@ class ManageInventoryPage extends React.Component {
 
 ManageInventoryPage.propTypes = {
   inventory: React.PropTypes.object.isRequired,
+  tags: React.PropTypes.array.isRequired,
   actions: React.PropTypes.object.isRequired
 };
 
@@ -83,8 +85,16 @@ function mapStateToProps(state, ownProps) {
     inventory = getInventoryById(state.inventories, inventoryId);
   }
 
+  const locationTagsFormattedForDropdown = state.locations.map(location => {
+    return {
+      value: location.locationId,
+      tag: location.tag
+    };
+  });
+
   return {
-    inventory: inventory
+    inventory: inventory,
+    tags: locationTagsFormattedForDropdown
   };
 }
 

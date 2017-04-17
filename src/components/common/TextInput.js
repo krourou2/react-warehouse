@@ -32,4 +32,10 @@ TextInput.propTypes = {
     error: PropTypes.string
 };
 
+TextInput.defaultProps = {
+  palceholder: null,
+  value: '',
+  error: null
+};
+
 export default TextInput;

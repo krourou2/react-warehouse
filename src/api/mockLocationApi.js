@@ -5,22 +5,22 @@ import delay from './delay';
 // All calls return promises.
 const locations = [
   {
-    locationId: 1001,
-    warehouseId: 1001,
+    locationId: "1001",
+    warehouseId: "1001",
     locationType: "floor",
     description: "floor location",
     tag: "1A1"
   },
   {
-    locationId: 1002,
-    warehouseId: 1001,
+    locationId: "1002",
+    warehouseId: "1001",
     locationType: "floor",
     description: "floor location",
     tag: "1A2"
   },
   {
-    locationId: 1003,
-    warehouseId: 1001,
+    locationId: "1003",
+    warehouseId: "1001",
     locationType: "floor",
     description: "floor location",
     tag: "1A3"

@@ -6,29 +6,29 @@ import delay from './delay';
 
 const articles = [
   {
-    article_id: 1001,
-    account_id: 1001,
+    article_id: "1001",
+    account_id: "1001",
     manufacturer: "Apple",
     description: "Iphone 4 8gb White",
     universal_product_code: "885909543274"
   },
   {
-    article_id: 1002,
-    account_id: 1001,
+    article_id: "1002",
+    account_id: "1001",
     manufacturer: "Apple",
     description: "Iphone 4 16gb White",
     universal_product_code: "885909420445"
   },
   {
-    article_id: 1003,
-    account_id: 1001,
+    article_id: "1003",
+    account_id: "1001",
     manufacturer: "Apple",
     description: "Iphone 4 8gb Black",
     universal_product_code: "885909543267"
   },
   {
-    article_id: 1004,
-    account_id: 1001,
+    article_id: "1004",
+    account_id: "1001",
     manufacturer: "Apple",
     description: "Iphone 4 16gb Black",
     universal_product_code: "885909407576"
