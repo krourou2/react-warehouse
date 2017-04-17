@@ -2,6 +2,8 @@ import React, {PropTypes} from 'react';
 import { Link, IndexLink } from 'react-router';
 import LoadingDots from './LoadingDots';
 
+//{loading && <LoadingDots interval={100} dots={20}/>} <-- goes on line 23
+
 const Header = ({loading}) => {
   return (
     <nav>
@@ -18,7 +20,7 @@ const Header = ({loading}) => {
       <Link to="/warehouses" activeClassName="active">Warehouses</Link>
       {" | "}
       <Link to="/locations" activeClassName="active">Locations</Link>
-      {loading && <LoadingDots interval={100} dots={20}/>}
+
     </nav>
   );
 };

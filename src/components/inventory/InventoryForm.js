@@ -2,7 +2,7 @@ import React from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const InventoryForm = ({allTags, inventory, onSave, onChange, saving, errors}) => {
+const InventoryForm = ({inventory, allTags, onSave, onChange, saving, errors}) => {
   return (
     <form>
       <h1>Manage Inventory</h1>
@@ -11,19 +11,25 @@ const InventoryForm = ({allTags, inventory, onSave, onChange, saving, errors}) =
         name="inventoryId"
         label="Inventory ID"
         value={inventory.inventory_id}
-        error={errors.inventory_id}/>
+        onChange={onChange}
+        error={errors.inventory_id}
+        disabled  />
 
       <TextInput
         name="warehouseId"
         label="Warehouse ID"
         value={inventory.warehouse_id}
-        error={errors.warehouse_id}/>
+        onChange={onChange}
+        error={errors.warehouse_id}
+        disabled  />
 
       <TextInput
         name="articleId"
         label="Article ID"
         value={inventory.article_id}
-        error={errors.article_id}/>
+        onChange={onChange}
+        error={errors.article_id}
+        disabled  />
 
       <SelectInput
         name="locationTag"
@@ -39,6 +45,7 @@ const InventoryForm = ({allTags, inventory, onSave, onChange, saving, errors}) =
         disabled={saving}
         value={saving ? 'Saving...' : 'Save'}
         className="btn btn-primary"
+        onChange={onChange}
         onClick={onSave}/>
     </form>
   );

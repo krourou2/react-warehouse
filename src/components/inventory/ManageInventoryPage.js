@@ -7,9 +7,9 @@ import InventoryForm from './InventoryForm';
 class ManageInventoryPage extends React.Component {
   constructor(props, context) {
     super(props, context);
-
+    console.log("INVENTORY", this.props.inventory);
     this.state = {
-      inventory: Object.assign({}, this.props.inventory),
+      inventory: null,
       errors: {},
       saving: false
     };
@@ -18,19 +18,29 @@ class ManageInventoryPage extends React.Component {
     this.saveInventory = this.saveInventory.bind(this);
   }
 
+  componentWillMount(){
+    const {inventory} = this.props;
+    console.log("CWM INVETORY", inventory);
+    if(inventory) this.setState({inventory});
+  }
+
   // ran every once in a while to check if props have changed
   componentWillReceiveProps(nextProps) {
-    if (this.props.inventory.inventory_id != nextProps.inventory.inventory_id) {
+    console.log("CWRP NEXT PROPS", nextProps.inventory);
+    console.log("CWRP THIS PROPS", this.props.inventory);
+    if (nextProps.inventory && this.props.inventory.inventory_id !== nextProps.inventory.inventory_id) {
       // Necessary to populate form when existing course is loaded directly.
       this.setState({inventory: Object.assign({}, nextProps.inventory)});
     }
   }
 
   updateInventoryState(event) {
-    const field = event.target.name;
-    let inventory = this.state.inventory;
-    inventory[field] = event.target.value;
-    return this.setState({inventory: inventory});
+    const {name, value} = event.target;
+    console.log("NAME", name);
+    console.log("VALUE", value);
+    const inventory = Object.assign({}, this.state.inventory);
+    inventory[name] = value;
+    this.setState({inventory});
   }
 
   saveInventory(event) {
@@ -49,11 +59,11 @@ class ManageInventoryPage extends React.Component {
     return (
       <InventoryForm
         allTags={this.props.tags}
-        inventory={this.state.inventory}
-        onSave={this.saveInventory}
         onChange={this.updateInventoryState}
-        saving={this.state.saving}
+        onSave={this.saveInventory}
+        inventory={this.state.inventory}
         errors={this.state.errors}
+        saving={this.state.saving}
       />
     );
   }
@@ -71,16 +81,15 @@ ManageInventoryPage.contextTypes = {
 };
 
 function getInventoryById(inventories, id) {
-  const inventory = inventories.filter(inventory => inventory.inventory_id == id);
-  if (inventory.length) return inventory[0]; //since filter returns an array, have to grab the first.
-  return null;
+  console.log("INVENTORIES", JSON.stringify(inventories));
+  console.log("ID", id);
+  return inventories.find(inventory => inventory.inventory_id === id);
 }
 
 function mapStateToProps(state, ownProps) {
   const inventoryId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
-
-  let inventory = {inventory_id: '', warehouse_id: '', article_id: ''};
-
+  console.log("INVENTORY ID", inventoryId);
+  let inventory = {inventory_id: '', warehouse_id: '', article_id: '', location_tag: ''};
   if (inventoryId && state.inventories.length > 0) {
     inventory = getInventoryById(state.inventories, inventoryId);
   }
@@ -88,9 +97,11 @@ function mapStateToProps(state, ownProps) {
   const locationTagsFormattedForDropdown = state.locations.map(location => {
     return {
       value: location.locationId,
-      tag: location.tag
+      text: location.tag
     };
   });
+
+  console.log("INVENTORY", inventory);
 
   return {
     inventory: inventory,

@@ -19,7 +19,8 @@ const CourseForm = ({course, allAuthors, onSave, onChange, saving, errors}) => {
         value={course.authorId}
         defaultOption="Select Author"
         options={allAuthors}
-        onChange={onChange} error={errors.authorId}/>
+        onChange={onChange}
+        error={errors.authorId}/>
 
       <TextInput
         name="category"
@@ -35,12 +36,12 @@ const CourseForm = ({course, allAuthors, onSave, onChange, saving, errors}) => {
         onChange={onChange}
         error={errors.length}/>
 
-        <input
-          type="submit"
-          disabled={saving}
-          value={saving ? 'Saving...' : 'Save'}
-          className="btn btn-primary"
-          onClick={onSave}/>
+      <input
+        type="submit"
+        disabled={saving}
+        value={saving ? 'Saving...' : 'Save'}
+        className="btn btn-primary"
+        onClick={onSave}/>
     </form>
   );
 };
