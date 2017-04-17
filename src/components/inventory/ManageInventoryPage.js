@@ -7,7 +7,7 @@ import InventoryForm from './InventoryForm';
 class ManageInventoryPage extends React.Component {
   constructor(props, context) {
     super(props, context);
-    console.log("INVENTORY", this.props.inventory);
+    console.log("CONSTRUCTOR INVENTORY", this.props.inventory);
     this.state = {
       inventory: null,
       errors: {},
