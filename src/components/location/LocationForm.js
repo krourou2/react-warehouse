@@ -11,18 +11,21 @@ const LocationForm = ({location, onSave, onChange, saving, errors}) => {
         name="locationId"
         label="Location ID"
         value={location.locationId}
+        onChange={onChange}
         error={errors.locationId}/>
 
       <TextInput
         name="warehouseId"
         label="Warehouse ID"
         value={location.warehouseId}
+        onChange={onChange}
         error={errors.warehouseId}/>
 
       <TextInput
         name="locationTag"
         label="Location Tag"
         value={location.tag}
+        onChange={onChange}
         error={errors.tag}/>
 
       <TextInput
@@ -44,8 +47,8 @@ const LocationForm = ({location, onSave, onChange, saving, errors}) => {
         disabled={saving}
         value={saving ? 'Saving...' : 'Save'}
         className="btn btn-primary"
+        onChange={onChange}
         onClick={onSave}/>
-
     </form>
   );
 };
