@@ -34,7 +34,7 @@ export function saveInventory(inventory) {
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
     return inventoryApi.saveInventory(inventory).then( savedInventory => {
-      inventory.inventory_id ? dispatch(updateInventorySuccess(savedInventory)) : dispatch(createInventorySuccess(savedInventory));
+      inventory.inventoryId ? dispatch(updateInventorySuccess(savedInventory)) : dispatch(createInventorySuccess(savedInventory));
     }).catch(error => {
       throw(error);
     });
