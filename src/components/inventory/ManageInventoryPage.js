@@ -7,9 +7,9 @@ import InventoryForm from './InventoryForm';
 class ManageInventoryPage extends React.Component {
   constructor(props, context) {
     super(props, context);
-    console.log("CONSTRUCTOR INVENTORY", this.props.inventory);
+
     this.state = {
-      inventory: null,
+      inventory: Object.assign({}, this.props.inventory),
       errors: {},
       saving: false
     };
@@ -18,29 +18,32 @@ class ManageInventoryPage extends React.Component {
     this.saveInventory = this.saveInventory.bind(this);
   }
 
-  componentWillMount(){
-    const {inventory} = this.props;
-    console.log("CWM INVETORY", inventory);
-    if(inventory) this.setState({inventory});
-  }
+  // componentWillMount(){
+  //   const {inventory} = this.props;
+  //   console.log("CWM INVETORY", inventory);
+  //   if(inventory) this.setState({inventory});
+  // }
 
   // ran every once in a while to check if props have changed
   componentWillReceiveProps(nextProps) {
-    console.log("CWRP NEXT PROPS", nextProps.inventory);
-    console.log("CWRP THIS PROPS", this.props.inventory);
-    if (nextProps.inventory && this.props.inventory.inventoryId !== nextProps.inventory.inventoryId) {
+    if (this.props.inventory && this.props.inventory.inventoryId != nextProps.inventory.inventoryId) {
       // Necessary to populate form when existing course is loaded directly.
       this.setState({inventory: Object.assign({}, nextProps.inventory)});
     }
   }
 
+  // updateInventoryState(event) {
+  //   const {name, value} = event.target;
+  //   const inventory = Object.assign({}, this.state.inventory);
+  //   inventory[name] = value;
+  //   return this.setState({inventory});
+  // }
+
   updateInventoryState(event) {
-    const {name, value} = event.target;
-    console.log("NAME", name);
-    console.log("VALUE", value);
-    const inventory = Object.assign({}, this.state.inventory);
-    inventory[name] = value;
-    this.setState({inventory});
+    const field = event.target.name;
+    let inventory = this.state.inventory;
+    inventory[field] = event.target.value;
+    return this.setState({inventory: inventory});
   }
 
   saveInventory(event) {
@@ -52,27 +55,29 @@ class ManageInventoryPage extends React.Component {
 
   redirect() {
     this.setState({saving: false});
-    this.context.router.push('/inventory');
+    this.context.router.push('/inventories');
   }
 
   render() {
     return (
       <InventoryForm
-        allTags={this.props.tags}
-        onChange={this.updateInventoryState}
-        onSave={this.saveInventory}
         inventory={this.state.inventory}
-        errors={this.state.errors}
+        allTags={this.props.tags}
+        allWarehouses={this.props.warehouseNumbers}
+        onSave={this.saveInventory}
+        onChange={this.updateInventoryState}
         saving={this.state.saving}
+        errors={this.state.errors}
       />
     );
   }
 }
 
 ManageInventoryPage.propTypes = {
-  inventory: React.PropTypes.object.isRequired,
-  tags: React.PropTypes.array.isRequired,
-  actions: React.PropTypes.object.isRequired
+  inventory: PropTypes.object.isRequired,
+  tags: PropTypes.array.isRequired,
+  warehouseNumbers: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
 };
 
 //Pull in the React Router context so router is available on this.context.router
@@ -81,15 +86,14 @@ ManageInventoryPage.contextTypes = {
 };
 
 function getInventoryById(inventories, id) {
-  console.log("INVENTORIES", JSON.stringify(inventories));
-  console.log("ID", id);
   return inventories.find(inventory => inventory.inventoryId === id);
 }
 
 function mapStateToProps(state, ownProps) {
   const inventoryId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
-  console.log("INVENTORY ID", inventoryId);
+
   let inventory = {inventoryId: '', warehouseId: '', articleId: '', locationTag: ''};
+
   if (inventoryId && state.inventories.length > 0) {
     inventory = getInventoryById(state.inventories, inventoryId);
   }
@@ -101,11 +105,20 @@ function mapStateToProps(state, ownProps) {
     };
   });
 
-  console.log("INVENTORY", inventory);
+  // TEMPORARY "1001" accountId until mock user authentication is in place
+  const warehouseNumbersFormattedForDropdown = state.warehouses.filter(warehouse => warehouse.accountId === "1001").map( warehouse => {
+    return {
+      value: warehouse.warehouseId,
+      text: warehouse.warehouseNumber
+    };
+  });
+
+  console.log("WNFFD", JSON.stringify(warehouseNumbersFormattedForDropdown));
 
   return {
     inventory: inventory,
-    tags: locationTagsFormattedForDropdown
+    tags: locationTagsFormattedForDropdown,
+    warehouseNumbers: warehouseNumbersFormattedForDropdown
   };
 }
 

@@ -2,18 +2,11 @@ import React from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const InventoryForm = ({inventory, allTags, onSave, onChange, saving, errors}) => {
+const InventoryForm = ({inventory, allTags, allWarehouses, onSave, onChange, saving, errors}) => {
+
   return (
     <form>
       <h1>Manage Inventory</h1>
-
-      <TextInput
-        name="inventoryId"
-        label="Inventory ID"
-        value={inventory.inventoryId}
-        onChange={onChange}
-        error={errors.inventory_id}
-        disabled  />
 
       <TextInput
         name="warehouseId"
@@ -22,6 +15,15 @@ const InventoryForm = ({inventory, allTags, onSave, onChange, saving, errors}) =
         onChange={onChange}
         error={errors.warehouseId}
         disabled  />
+
+      <SelectInput
+        name="warehouseNumber"
+        label="Warehouse Number"
+        value={allWarehouses.warehouseId}
+        defaultOption="Select Warehouse Number"
+        onChange={onChange}
+        error={errors.warehouseNumber}
+        options={allWarehouses} />
 
       <TextInput
         name="articleId"
@@ -34,7 +36,7 @@ const InventoryForm = ({inventory, allTags, onSave, onChange, saving, errors}) =
       <SelectInput
         name="locationTag"
         label="Location Tag"
-        value={inventory.locationTag}
+        value={inventory.locationId}
         defaultOption="Select Location Tag"
         options={allTags}
         onChange={onChange}
@@ -57,7 +59,8 @@ InventoryForm.propTypes = {
   onSave: React.PropTypes.func.isRequired,
   onChange: React.PropTypes.func.isRequired,
   saving: React.PropTypes.bool,
-  errors: React.PropTypes.object
+  errors: React.PropTypes.object,
+  allWarehouses: React.PropTypes.array
 };
 
 export default InventoryForm;

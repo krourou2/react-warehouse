@@ -7,7 +7,7 @@ const LocationList = ({locations}) => {
       <thead>
         <tr>
           <th>Location ID</th>
-          <th>Warehouse ID</th>
+          <th>Warehouse Number</th>
           <th>Location Type</th>
           <th>Tag</th>
           <th>Description</th>

@@ -4,7 +4,6 @@ import {beginAjaxCall} from './ajaxStatusActions';
 
 //** ACTION CREATOR **//
 export function loadInventorySuccess(inventories){
-  console.log("LIS INVENTORIES", inventories);
   return { type: types.LOAD_INVENTORY_SUCCESS, inventories: inventories};
 }
 
@@ -21,9 +20,8 @@ export function createInventorySuccess(inventory){
 export function loadInventories() {
   return function(dispatch) {
     dispatch(beginAjaxCall());
-    return inventoryApi.getAllInventories().then(inventory => {
-      console.log("API INVENTORY", inventory);
-      dispatch(loadInventorySuccess(inventory));
+    return inventoryApi.getAllInventories().then(inventories => {
+      dispatch(loadInventorySuccess(inventories));
     }).catch(error => {
       throw(error);
     });

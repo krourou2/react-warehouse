@@ -8,13 +8,19 @@ const inventories = [
     inventoryId: "1001",
     warehouseId: "1001",
     articleId: "1001",
-    locationTag: "1A1"
+    locationId: "1001"
   },
   {
     inventoryId: "1002",
     warehouseId: "1001",
     articleId: "1002",
-    locationTag: "1A2"
+    locationId: "1002"
+  },
+  {
+    inventoryId: "1003",
+    warehouseId: "1001",
+    articleId: "1003",
+    locationId: "1003"
   }
 ];
 

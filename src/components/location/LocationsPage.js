@@ -41,8 +41,22 @@ LocationsPage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
+
+  const locationsFormattedForPage = state.locations.map(location => {
+
+    const warehouse = state.warehouses.find(warehouse => warehouse.warehouseId === location.warehouseId);
+
+    return {
+      locationId: location.locationId,
+      warehouse: warehouse,
+      locationType: location.locationType,
+      description: location.description,
+      tag: location.tag
+    };
+  });
+
   return {
-    locations: state.locations
+    locations: locationsFormattedForPage
   };
 }
 

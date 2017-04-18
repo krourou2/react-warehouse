@@ -8,9 +8,9 @@ const InventoryList = ({inventories}) => {
       <thead>
       <tr>
         <th>Inventory ID</th>
-        <th>Warehouse ID</th>
-        <th>Article ID</th>
-        <th>Location ID</th>
+        <th>Warehouse Number</th>
+        <th>Article UPC</th>
+        <th>Location Tag</th>
       </tr>
       </thead>
       <tbody>
@@ -24,7 +24,7 @@ const InventoryList = ({inventories}) => {
 };
 
 InventoryList.propTypes = {
-  inventories: React.PropTypes.array.isRequired
+  inventories: PropTypes.array.isRequired
 };
 
 export default InventoryList;
