@@ -1,5 +1,5 @@
 import delay from './delay';
-
+import ArticleProxy from '../service/articleProxy';
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
 // All calls return promises.
@@ -47,11 +47,12 @@ const generateId = (article) => {
 
 class ArticleApi {
   static getAllArticles() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(Object.assign([], articles));
-      }, delay);
-    });
+    return ArticleProxy.Get();
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve(Object.assign([], articles));
+    //   }, delay);
+    // });
   }
 
   static saveArticle(article) {
