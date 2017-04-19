@@ -2,13 +2,13 @@ import HttpPromise from '../../utils/httpPromise';
 import StringUtils from '../../utils/stringUtils';
 const FORWARD_SLASH = '/';
 class HttpProxy {
-    url = null;
-    constructor(url) {
+
+    constructor(url, mapper) {
         this.url = url;
+      this.mapper = typeof mapper === "function" ? response => response.map(mapper) : response => response;
     }
     Get(endpoint, data) {
-        return HttpPromise.GET(HttpProxy.combineURL(this.url, endpoint), data)
-            .then(response => response.content);
+        return HttpPromise.GET(HttpProxy.combineURL(this.url, endpoint), data).then(this.mapper);
     }
     Post(endpoint, data) {
         return HttpPromise.POST(HttpProxy.combineURL(this.url, endpoint), data)

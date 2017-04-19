@@ -3,8 +3,8 @@ import articleApi from '../api/mockArticleApi';
 import {beginAjaxCall} from './ajaxStatusActions';
 
 //** ACTION CREATOR**//
-export function loadArticlesSuccess(articles) {
-  return { type: types.LOAD_ARTICLES_SUCCESS, articles: articles };
+export function loadArticlesSuccess(articleList) {
+  return { type: types.LOAD_ARTICLES_SUCCESS, articles: articleList };
 }
 
 export function updateArticleSuccess(article) {

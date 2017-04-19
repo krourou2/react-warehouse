@@ -4,7 +4,7 @@ export default {
         TRAILING: '$',
         LEADING: '^',
         format(expression) {
-            return expression.includes(' ') ? expression.split(' ').join(this.WHITESPACE) : expression
+            return expression.includes(' ') ? expression.split(' ').join(this.WHITESPACE) : expression;
         }
     },
     formatPattern(expression) {

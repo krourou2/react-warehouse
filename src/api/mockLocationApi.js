@@ -1,4 +1,5 @@
 import delay from './delay';
+import LocationProxy from '../service/locationProxy';
 
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
@@ -38,6 +39,11 @@ const generateId = (location) => {
 
 class LocationApi {
   static getAllLocations() {
+    console.log("LOCATION PROXY", LocationProxy);
+    LocationProxy.Get().then(response => {
+      console.log("response", JSON.stringify(response));
+      return response;
+    });
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(Object.assign([], locations));

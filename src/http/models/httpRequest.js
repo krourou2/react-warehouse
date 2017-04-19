@@ -13,9 +13,9 @@ class HttpRequest {
         this.send(config.params);
     }
     static Initialize() {
-        return window.XMLHttpRequest ?
-            new XMLHttpRequest() :
-            new ActiveXObject(ACTIVE_X_OBJECT_NAME);
+        return window.XMLHttpRequest &&//?
+            new XMLHttpRequest(); //:
+            //new ActiveXObject(ACTIVE_X_OBJECT_NAME);
     }
     open(methodType, resourceUrl) {
         this.ajax.open(methodType, resourceUrl, true);
@@ -38,7 +38,7 @@ class HttpRequest {
     onError({reject}) {
         if(typeof reject === 'function') this.ajax.onerror = function(){
             reject({description: this.statusText});
-        }
+        };
     }
     send(params){
         if(params) this.ajax.send(this.params);

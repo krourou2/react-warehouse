@@ -47,7 +47,11 @@ const generateId = (article) => {
 
 class ArticleApi {
   static getAllArticles() {
-    return ArticleProxy.Get();
+      console.log("ARTICLE PROXY", ArticleProxy);
+    return ArticleProxy.Get().then(response => {
+      console.log("response", JSON.stringify(response));
+      return response;
+    });
     // return new Promise((resolve, reject) => {
     //   setTimeout(() => {
     //     resolve(Object.assign([], articles));
