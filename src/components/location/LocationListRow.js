@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
 const LocationListRow = ({location}) => {
+  console.log("LSR LOCATION", JSON.stringify(location));
   return(
     <tr>
       <td><Link to={'location/:' + location.locationId}>{location.locationId}</Link></td>

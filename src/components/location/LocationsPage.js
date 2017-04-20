@@ -43,7 +43,7 @@ LocationsPage.propTypes = {
 function mapStateToProps(state, ownProps) {
 
   const locationsFormattedForPage = state.locations.map(location => {
-
+    console.log("LOCATION DURING MAP", JSON.stringify(location));
     const warehouse = state.warehouses.find(warehouse => warehouse.warehouseId === location.warehouseId);
 
     return {
@@ -54,6 +54,8 @@ function mapStateToProps(state, ownProps) {
       tag: location.tag
     };
   });
+
+  console.log("LFFP LIST", JSON.stringify(locationsFormattedForPage));
 
   return {
     locations: locationsFormattedForPage

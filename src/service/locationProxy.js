@@ -1,12 +1,13 @@
 import SCCWarehouseProxy from './sccWarehouseProxy';
 
 const fromDomainModelToViewModel = location => {
-  const {Location_ID, Warehouse_ID, Location_Type, Description} = location;
+  const {Location_ID, Warehouse_ID, Location_Type, Description, Location_Tag} = location;
   return {
-    locationId: Location_ID,
-    warehouseId: Warehouse_ID,
+    locationId: Location_ID.toString(),
+    warehouseId: Warehouse_ID.toString(),
     locationType: Location_Type,
-    description: Description
+    description: Description,
+    tag: Location_Tag
   };
 };
 
