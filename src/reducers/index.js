@@ -6,6 +6,7 @@ import warehouses from './warehouseReducer';
 import locations from './locationReducer';
 import locationTags from './locationTagReducer';
 import inventories from './inventoryReducer';
+import users from './userReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   warehouses: warehouses,
   locations: locations,
   locationTags: locationTags,
+  users: users,
   ajaxCallsInProgress: ajaxCallsInProgress
 });
 

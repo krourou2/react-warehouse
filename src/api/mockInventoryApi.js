@@ -1,4 +1,5 @@
 import delay from './delay';
+import InventoryProxy from '../service/inventoryProxy';
 
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
@@ -35,11 +36,16 @@ const generateId = (inventory) => {
 
 class InventoryApi {
   static getAllInventories() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(Object.assign([], inventories));
-      }, delay);
+    console.log("INVENTORY PROXY", InventoryProxy);
+    return InventoryProxy.Get().then(response => {
+      console.log("response", JSON.stringify(response));
+      return response;
     });
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve(Object.assign([], inventories));
+    //   }, delay);
+    // });
   }
 
   static saveInventory(inventory) {

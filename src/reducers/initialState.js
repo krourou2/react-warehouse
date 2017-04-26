@@ -6,5 +6,7 @@ export default {
   locations: [],
   locationTags: [],
   inventories: [],
+  users: [],
+  activeUser: [],
   ajaxCallsInProgress: 0
 };

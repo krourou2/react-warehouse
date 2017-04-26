@@ -21,9 +21,9 @@ const InventoryForm = ({inventory, allTags, allWarehouses, onSave, onChange, sav
         label="Warehouse Number"
         value={allWarehouses.warehouseId}
         defaultOption="Select Warehouse Number"
+        options={allWarehouses}
         onChange={onChange}
-        error={errors.warehouseNumber}
-        options={allWarehouses} />
+        error={errors.warehouseNumber}/>
 
       <TextInput
         name="articleId"
