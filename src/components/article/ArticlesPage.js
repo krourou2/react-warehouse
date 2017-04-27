@@ -42,8 +42,14 @@ ArticlesPage.propTypes = {
 
 //** what part of state is going to be exposed to props **//
 function mapStateToProps(state, ownProps) {
+
+  //will change to filter active user's account id
+  //const articlesByAccountId = state.articles.filter(article => article.articleId === state.activeUser.accountId);
+  const articlesByAccountId = state.articles.filter(article => article.articleId === "1001");
+
   return {
-    articles: state.articles
+    articles: articlesByAccountId
+    //articles: state.articles
   };
 }
 

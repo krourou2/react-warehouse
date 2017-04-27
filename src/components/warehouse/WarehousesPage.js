@@ -42,8 +42,16 @@ WarehousesPage.propTypes = {
 
 //** what part of state is going to be exposed to props **//
 function mapStateToProps(state, ownProps) {
+
+  //will filter by active user's account ID
+  //const wareHousesByAccountId = state.warehouses.filter( warehouse => warehouse.accountId === state.activeUser.accountId);
+  const wareHousesByAccountId = state.warehouses.filter( warehouse => warehouse.accountId === "1001");
+
+  console.log("WAREHOUSES BY ACCOUNT ID", wareHousesByAccountId);
+
   return {
-    warehouses: state.warehouses
+    warehouses: wareHousesByAccountId
+    //warehouses: state.warehouses
   };
 }
 
