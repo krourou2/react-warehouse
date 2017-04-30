@@ -12,6 +12,12 @@ export default function userReducer(state = initialState.users, action) {
         Object.assign({}, action.user)
       ];
 
+    case types.UPDATE_ACTIVE_USER_SUCCESS:
+      console.log("UPDATE ACTIVE USER", JSON.stringify(action.user));
+      return[
+        ...state.activeUser.push(action.user)
+      ];
+
     case types.CREATE_USER_SUCCESS:
       return [
         ...state,

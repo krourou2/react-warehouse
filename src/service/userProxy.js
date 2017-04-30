@@ -1,9 +1,10 @@
 import SCCWarehouseProxy from './sccWarehouseProxy';
 
 const fromDomainModelToViewModel = user => {
-  const {User_ID, Email, Password} = user;
+  const {User_ID, Email, Password, Account_ID} = user;
   return {
     userId: User_ID.toString(),
+    accountId: Account_ID.toString(),
     email: Email,
     password: Password
   };

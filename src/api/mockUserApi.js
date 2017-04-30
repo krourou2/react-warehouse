@@ -8,6 +8,7 @@ import UserProxy from '../service/userProxy';
 const users = [
   {
     userId: "1001",
+    accountId: "1001",
     email: "Donnell.Schroeter@gmail.com",
     password: "warehouse "
   }

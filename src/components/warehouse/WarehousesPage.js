@@ -45,13 +45,13 @@ function mapStateToProps(state, ownProps) {
 
   //will filter by active user's account ID
   //const wareHousesByAccountId = state.warehouses.filter( warehouse => warehouse.accountId === state.activeUser.accountId);
-  const wareHousesByAccountId = state.warehouses.filter( warehouse => warehouse.accountId === "1001");
+  console.log("WAREHOUSE ACTIVE USER ACCOUNT ID", JSON.stringify(state.activeUser[0]));
+  const wareHousesByAccountId = state.warehouses.filter( warehouse => warehouse.accountId === state.activeUser[0].accountId);
 
   console.log("WAREHOUSES BY ACCOUNT ID", wareHousesByAccountId);
 
   return {
     warehouses: wareHousesByAccountId
-    //warehouses: state.warehouses
   };
 }
 

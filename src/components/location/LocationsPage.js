@@ -41,9 +41,12 @@ LocationsPage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
+  const warehouseId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
 
-  const locationsFormattedForPage = state.locations.map(location => {
-    console.log("LOCATION DURING MAP", JSON.stringify(location));
+  const locationsByWarehouse = state.locations.filter(location => location.warehouseId === warehouseId);
+      console.log("LOCATIONS BY WAREHOUSE", JSON.stringify(locationsByWarehouse));
+  const locationsFormattedForPage = locationsByWarehouse.map(location => {
+    //console.log("LOCATION DURING MAP", JSON.stringify(location));
     const warehouse = state.warehouses.find(warehouse => warehouse.warehouseId === location.warehouseId);
 
     return {

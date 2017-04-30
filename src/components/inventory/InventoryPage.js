@@ -42,8 +42,11 @@ InventoryPage.propTypes = {
 
 //** what part of state is going to be exposed to props **//
 function mapStateToProps(state, ownProps) {
+  const warehouseId = ownProps.params.id.replace(":","");
 
-  const inventoriesFormattedForPage = state.inventories.map(inventory => {
+  const inventoriesByWarehouse = state.inventories.filter(inventory => inventory.warehouseId === warehouseId);
+  console.log("INVENTORIES WAREHOUSE ID", JSON.stringify(inventoriesByWarehouse));
+  const inventoriesFormattedForPage = inventoriesByWarehouse.map(inventory => {
 
     const location = state.locations.find(location => location.locationId === inventory.locationId);
     const article = state.articles.find(article => article.articleId === inventory.articleId);

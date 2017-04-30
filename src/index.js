@@ -8,7 +8,7 @@ import { Router, browserHistory } from 'react-router';
 import routes from './routes';
 import {loadAuthors} from './actions/authorActions';
 import {loadCourses} from './actions/courseActions'; // IMPORT LOADCOURSES FUNCTION FROM COURSESACTIONS TO TELL APP TO LOAD COURSES ON ENTRY
-import {loadUsers} from './actions/userActions';
+import {loadUsers, createActiveUser} from './actions/userActions';
 import {loadArticles} from './actions/articleActions';
 import {loadWarehouses} from './actions/warehouseActions';
 import {loadLocations} from './actions/locationActions';
@@ -24,6 +24,7 @@ store.dispatch(loadWarehouses());
 store.dispatch(loadLocations());
 store.dispatch(loadInventories());
 store.dispatch(loadUsers());
+store.dispatch(createActiveUser());
 
 render(
   <Provider store={store}>

@@ -13,13 +13,13 @@ const Header = ({loading}) => {
       {" | "}
       <Link to="/about" activeClassName="active">About</Link>
       {" | "}
-      <Link to="/inventories" activeClassName="active">Inventory</Link>
-      {" | "}
+      {/*<Link to="/inventories" activeClassName="active">Inventory</Link>*/}
+      {/*{" | "}*/}
       <Link to="/articles" activeClassName="active">Articles</Link>
       {" | "}
       <Link to="/warehouses" activeClassName="active">Warehouses</Link>
-      {" | "}
-      <Link to="/locations" activeClassName="active">Locations</Link>
+      {/*{" | "}*/}
+      {/*<Link to="/locations" activeClassName="active">Locations</Link>*/}
 
     </nav>
   );

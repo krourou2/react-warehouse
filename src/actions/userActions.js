@@ -15,6 +15,10 @@ export function updateUserSuccess(user) {
   return { type: types.UPDATE_USER_SUCCESS, user: user };
 }
 
+export function createActiveUserSuccess(user) {
+  return { type: types.CREATE_ACTIVE_USER_SUCCESS, user: user };
+}
+
 //** THUNKS AJAX CALLS **//
 //** GRABS COURSES FROM API END POINT **//
 export function loadUsers() {
@@ -22,6 +26,18 @@ export function loadUsers() {
     dispatch(beginAjaxCall());
     return UserApi.getAllUsers().then(users => {
       dispatch(loadUsersSuccess(users));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function createActiveUser() {
+  return function(dispatch) {
+    dispatch(beginAjaxCall());
+    return UserApi.getAllUsers().then(users => {
+      console.log("ACTIVE USER", JSON.stringify(users.filter(user  => user.userId === "1001")));
+      dispatch(createActiveUserSuccess(users.find(user  => user.userId === "1001")));
     }).catch(error => {
       throw(error);
     });

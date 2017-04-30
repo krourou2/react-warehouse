@@ -7,6 +7,7 @@ import locations from './locationReducer';
 import locationTags from './locationTagReducer';
 import inventories from './inventoryReducer';
 import users from './userReducer';
+import activeUser from './activeUserReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';
 
 const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   locations: locations,
   locationTags: locationTags,
   users: users,
+  activeUser: activeUser,
   ajaxCallsInProgress: ajaxCallsInProgress
 });
 

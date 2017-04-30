@@ -19,19 +19,20 @@ export default (
     <IndexRoute component={HomePage} />
     <Route path="about" component={AboutPage} />
     <Route path="courses" component={CoursesPage} />
-    <Route path="course" component={ManageCoursePage} />
-    <Route path="course/:id" component={ManageCoursePage} />
-    <Route path="inventories" component={InventoryPage}/>
-    <Route path="inventory" component={ManageInventoryPage}/>
-    <Route path="inventory/:id" component={ManageInventoryPage}/>
+    <Route path="course/manage/" component={ManageCoursePage} />
+    <Route path="course/manage/:id" component={ManageCoursePage} />
+    <Route path="inventory" component={InventoryPage}/>
+    <Route path="inventory/manage/" component={ManageInventoryPage}/>
+    <Route path="inventory/manage/:id" component={ManageInventoryPage}/>
     <Route path="articles" component={ArticlesPage}/>
-    <Route path="article" component={ManageArticlesPage}/>
-    <Route path="article/:id" component={ManageArticlesPage}/>
+    <Route path="article/manage/" component={ManageArticlesPage}/>
+    <Route path="article/manage/:id" component={ManageArticlesPage}/>
     <Route path="warehouses" component={WarehousesPage}/>
-    <Route path="warehouse" component={ManageWarehousePage}/>
-    <Route path="warehouse/:id" component={ManageWarehousePage} />
-    <Route path="locations" component={LocationsPage}/>
-    <Route path="location" component={ManageLocationPage}/>
-    <Route path="location/:id" component={ManageLocationPage}/>
+    <Route path="warehouse/manage/" component={ManageWarehousePage}/>
+    <Route path="warehouse/manage/:id" component={ManageWarehousePage} />
+    <Route path="warehouse/inventory/:id" component={InventoryPage} />
+    <Route path="locations/:id" component={LocationsPage}/>
+    <Route path="location/manage/" component={ManageLocationPage}/>
+    <Route path="location/manage/:id" component={ManageLocationPage}/>
   </Route>
 );
