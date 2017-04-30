@@ -14,7 +14,7 @@ class ArticlesPage extends React.Component {
   }
 
   redirectToAddArticlePage() {
-    browserHistory.push('/article');
+    browserHistory.push('/article/manage/');
   }
 
   render() {

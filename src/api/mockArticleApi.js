@@ -42,6 +42,7 @@ function replaceAll(str, find, replace) {
 
 //This would be performed on the server in a real app. Just stubbing in.
 const generateId = (article) => {
+  console.log("ARTICLE GENERATE ID", article);
   return replaceAll(article.articleId, ' ', '-');
 };
 
@@ -76,6 +77,7 @@ class ArticleApi {
           //Just simulating creation here.
           //The server would generate ids and watchHref's for new courses in a real app.
           //Cloning so copy returned is passed by value rather than by reference.
+          console.log("SAVE ARTICLE", article);
           article.articleId = generateId(article);
           articles.push(article);
         }

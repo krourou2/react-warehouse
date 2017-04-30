@@ -8,9 +8,9 @@ const InventoryList = ({inventories}) => {
       <thead>
       <tr>
         <th>Inventory ID</th>
-        <th>Warehouse Number</th>
-        <th>Article UPC</th>
-        <th>Location Tag</th>
+        <th>Warehouse</th>
+        <th>Article</th>
+        <th>Location</th>
       </tr>
       </thead>
       <tbody>

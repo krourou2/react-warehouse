@@ -22,7 +22,7 @@ class ManageArticlePage extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.article.articleId != nextProps.article.articleId) {
       // Necessary to populate form when existing course is loaded directly.
-      this.setState({course: Object.assign({}, nextProps.article)});
+      this.setState({article: Object.assign({}, nextProps.article)});
     }
   }
 
@@ -34,6 +34,7 @@ class ManageArticlePage extends React.Component {
   }
 
   saveArticle(event) {
+    console.log("STATE ARTICLE", this.state.article);
     event.preventDefault();
     this.setState({saving: true});
     this.props.actions.saveArticle(this.state.article)
@@ -75,22 +76,16 @@ function getArticleById(articles, id) {
 }
 
 function mapStateToProps(state, ownProps) {
-  const articleId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
+  let articleId, article;
 
-  let article = {article_id: '', account_id: '', manufacturer: '', description: '', universal_product_code: ''};
-
-  if (articleId && state.courses.length > 0) {
-    article = getArticleById(state.articles, articleId);
+  console.log("MAX ARTICLE ID", parseInt(state.articles[state.articles.length - 1].articleId));
+  if (ownProps.params.id){
+    articleId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
+    article = state.articles.find(article => article.articleId === articleId);
+  } else {
+    articleId = parseInt(state.articles[state.articles.length - 1].articleId ) + 1;
+    article = {articleId: articleId.toString(), accountId: state.activeUser[0].accountId, manufacturer: '', description: '', universalProductCode: ''};
   }
-
-  /*
-  const authorsFormattedForDropdown = state.authors.map(author => {
-    return {
-      value: author.id,
-      text: author.firstName + ' ' + author.lastName
-    };
-  });
-  */
 
   return {
     article: article
