@@ -7,8 +7,7 @@ const InventoryList = ({inventories}) => {
     <table className="table">
       <thead>
       <tr>
-        <th>Inventory ID</th>
-        <th>Warehouse</th>
+        <th>Manage</th>
         <th>Article</th>
         <th>Location</th>
       </tr>

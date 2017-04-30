@@ -6,10 +6,10 @@ const WarehouseList = ({warehouses}) => {
     <table className="table">
       <thead>
       <tr>
-        <th></th>
-        <th>Warehouse Number</th>
-        <th>Warehouse Name</th>
-        <th></th>
+        <th>View Inventory</th>
+        <th>Number</th>
+        <th>Name</th>
+        <th>View Locations</th>
       </tr>
       </thead>
       <tbody>

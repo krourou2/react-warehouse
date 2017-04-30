@@ -6,9 +6,8 @@ const LocationList = ({locations}) => {
     <table className="table">
       <thead>
         <tr>
-          <th>Location ID</th>
-          <th>Warehouse Number</th>
-          <th>Location Type</th>
+          <th>ID</th>
+          <th>Type</th>
           <th>Tag</th>
           <th>Description</th>
         </tr>
