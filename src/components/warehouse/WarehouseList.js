@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import WarehouseListRow from './WarehouseListRow';
 
 const WarehouseList = ({warehouses}) => {
+
   return (
     <table className="table">
       <thead>

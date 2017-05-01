@@ -16,7 +16,7 @@ const WarehouseForm = ({warehouse, onSave, onChange, saving, errors}) => {
 
       <TextInput
         name="warehouseName"
-        label="Warehouse Number"
+        label="Warehouse Name"
         value={warehouse.warehouseName}
         onChange={onChange}
         errors={errors.title}/>

@@ -34,6 +34,7 @@ class ManageWarehousePage extends React.Component {
   }
 
   saveWarehouse(event) {
+    console.log("SAVE WAREHOUSE", this.state.warehouse);
     event.preventDefault();
     this.setState({saving: true});
     this.props.actions.saveWarehouse(this.state.warehouse)
@@ -42,17 +43,17 @@ class ManageWarehousePage extends React.Component {
 
   redirect() {
     this.setState({saving: false});
-    this.context.router.push('./warehouses');
+    this.context.router.push('/warehouses');
   }
 
   render() {
     return (
       <WarehouseForm
+        onChange={this.updateWarehouseState}
         warehouse={this.state.warehouse}
         onSave={this.saveWarehouse}
-        onChange={this.updateWarehouseState}
-        saving={this.state.saving}
         errors={this.state.errors}
+        saving={this.state.saving}
       />
     );
   }
@@ -68,19 +69,16 @@ ManageWarehousePage.contextTypes = {
   router: PropTypes.object
 };
 
-function getWarehouseById(warehouses, id) {
-  const warehouse = warehouses.filter(warehouse => warehouse.warehouseId == id);
-  if (warehouse.length) return warehouse[0]; //since filter returns an array, have to grab the first.
-  return null;
-}
-
 function mapStateToProps(state, ownProps) {
-  const warehouseId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
+  let warehouseId, warehouse;
 
-  let warehouse = {warehouseId: '', warehouseNumber: '', warehouseName: '', archiveLength: ''};
-
-  if (warehouseId && state.courses.length > 0) {
-    warehouse = getWarehouseById(state.warehouses, warehouseId);
+  console.log("MAX WAREHOUSE ID", parseInt(state.warehouses[state.warehouses.length - 1].warehouseId));
+  if (ownProps.params.id){
+    warehouseId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
+    warehouse = state.warehouses.find(warehouse => warehouse.warehouseId === warehouseId);
+  } else {
+    warehouseId = parseInt(state.warehouses[state.warehouses.length - 1].warehouseId ) + 1;
+    warehouse = {warehouseId: '', accountId: '', warehouseNumber: '', warehouseName: ''};
   }
 
   return {

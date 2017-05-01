@@ -29,6 +29,7 @@ export function loadInventories() {
 }
 
 export function saveInventory(inventory) {
+  console.log("SAVE INVENTORY ACTION", JSON.stringify(inventory));
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
     return inventoryApi.saveInventory(inventory).then( savedInventory => {

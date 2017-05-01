@@ -2,28 +2,11 @@ import React from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const InventoryForm = ({inventory, allTags, allWarehouses, onSave, onChange, saving, errors}) => {
+const InventoryForm = ({inventory, allTags, onSave, onChange, saving, errors}) => {
 
   return (
     <form>
       <h1>Manage Inventory</h1>
-
-      <TextInput
-        name="warehouseId"
-        label="Warehouse ID"
-        value={inventory.warehouseId}
-        onChange={onChange}
-        error={errors.warehouseId}
-        disabled  />
-
-      <SelectInput
-        name="warehouseNumber"
-        label="Warehouse Number"
-        value={allWarehouses.warehouseId}
-        defaultOption="Select Warehouse Number"
-        options={allWarehouses}
-        onChange={onChange}
-        error={errors.warehouseNumber}/>
 
       <TextInput
         name="articleId"
@@ -34,7 +17,7 @@ const InventoryForm = ({inventory, allTags, allWarehouses, onSave, onChange, sav
         disabled  />
 
       <SelectInput
-        name="locationTag"
+        name="locationId"
         label="Location Tag"
         value={inventory.locationId}
         defaultOption="Select Location Tag"

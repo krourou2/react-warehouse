@@ -10,7 +10,7 @@ class ArticlesPage extends React.Component {
   //** CONSTRUCTOR INITIALIZES STATE AND CALLS BIND FUNCTIONS **//
   constructor(props, context){
     super(props, context);
-    this.redirectToAddArticlePage = this.redirectToAddArticlePage.bind();
+    this.redirectToAddArticlePage = this.redirectToAddArticlePage.bind(this);
   }
 
   redirectToAddArticlePage() {

@@ -4,7 +4,7 @@ import TextInput from '../common/TextInput';
 const ArticleForm = ({article, onSave, onChange, saving, errors}) => {
   return (
     <form>
-      <h1>Manage Articles</h1>
+      <h1>Manage Article</h1>
       <TextInput
         name="universalProductCode"
         label="UPC"

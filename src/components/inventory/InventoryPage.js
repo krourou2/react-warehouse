@@ -10,11 +10,12 @@ class InventoryPage extends React.Component {
   //** CONSTRUCTOR INITIALIZES STATE AND CALLS BIND FUNCTIONS **//
   constructor(props, context){
     super(props, context);
-    this.redirectToAddInventoryPage = this.redirectToAddInventoryPage.bind();
+    this.redirectToAddInventoryPage = this.redirectToAddInventoryPage.bind(this);
   }
 
   redirectToAddInventoryPage() {
-    browserHistory.push('/inventories');
+    console.log("REDIRECT TO ADD INVENTORY WAREHOUSE ID", this.props.warehouseId);
+    browserHistory.push('/inventory/:' + this.props.warehouseId + '/manage/');
   }
 
   render () {
@@ -22,7 +23,7 @@ class InventoryPage extends React.Component {
 
     return(
       <div>
-        <h1>Inventory</h1>
+        <h1>Inventory in - {this.props.warehouseName}</h1>
         <input
           type="submit"
           value="Add Inventory"
@@ -37,15 +38,18 @@ class InventoryPage extends React.Component {
 //** PROP TYPE VALIDATION **//
 InventoryPage.propTypes = {
   inventories: React.PropTypes.array.isRequired,
+  warehouseId: React.PropTypes.string.isRequired,
+  warehouseName: React.PropTypes.string.isRequired,
   actions: React.PropTypes.object.isRequired
 };
 
 //** what part of state is going to be exposed to props **//
 function mapStateToProps(state, ownProps) {
   const warehouseId = ownProps.params.id.replace(":","");
-
+  const warehouseName = state.warehouses.find(warehouse => warehouse.warehouseId === warehouseId).warehouseName;
   const inventoriesByWarehouse = state.inventories.filter(inventory => inventory.warehouseId === warehouseId);
-  console.log("INVENTORIES WAREHOUSE ID", JSON.stringify(inventoriesByWarehouse));
+  console.log("INVENTORIES WAREHOUSE ID", JSON.stringify(warehouseId));
+
   const inventoriesFormattedForPage = inventoriesByWarehouse.map(inventory => {
 
     const location = state.locations.find(location => location.locationId === inventory.locationId);
@@ -60,8 +64,12 @@ function mapStateToProps(state, ownProps) {
     };
   });
 
+  console.log("WAREHOUSE ID RIGHT BEFORE RETURN", warehouseId);
+
   return {
-    inventories: inventoriesFormattedForPage
+    inventories: inventoriesFormattedForPage,
+    warehouseId: warehouseId,
+    warehouseName: warehouseName
   };
 }
 

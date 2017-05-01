@@ -5,7 +5,7 @@ const LocationListRow = ({location}) => {
   console.log("LSR LOCATION", JSON.stringify(location));
   return(
     <tr>
-      <td><Link to={'location/manage/:' + location.locationId}>{location.locationId}</Link></td>
+      <td><Link to={'location/:' + location.warehouseId + '/manage/:' + location.locationId}>{location.locationId}</Link></td>
       <td>{location.locationType}</td>
       <td>{location.tag}</td>
       <td>{location.description}</td>

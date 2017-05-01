@@ -22,8 +22,8 @@ export default (
     <Route path="course/manage/" component={ManageCoursePage} />
     <Route path="course/manage/:id" component={ManageCoursePage} />
     <Route path="inventory" component={InventoryPage}/>
-    <Route path="inventory/manage/" component={ManageInventoryPage}/>
-    <Route path="inventory/manage/:id" component={ManageInventoryPage}/>
+    <Route path="inventory/:warehouseId/manage/" component={ManageInventoryPage}/>
+    <Route path="inventory/:warehouseId/manage/:id" component={ManageInventoryPage}/>
     <Route path="articles" component={ArticlesPage}/>
     <Route path="article/manage/" component={ManageArticlesPage}/>
     <Route path="article/manage/:id" component={ManageArticlesPage}/>
@@ -32,7 +32,8 @@ export default (
     <Route path="warehouse/manage/:id" component={ManageWarehousePage} />
     <Route path="warehouse/inventory/:id" component={InventoryPage} />
     <Route path="locations/:id" component={LocationsPage}/>
-    <Route path="location/manage/" component={ManageLocationPage}/>
-    <Route path="location/manage/:id" component={ManageLocationPage}/>
+    {/*<Route path="location/manage/" component={ManageLocationPage}/>*/}
+    <Route path="location/:warehouseId/manage/" component={ManageLocationPage}/>
+    <Route path="location/:warehouseId/manage/:id" component={ManageLocationPage}/>
   </Route>
 );

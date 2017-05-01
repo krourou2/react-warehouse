@@ -9,7 +9,7 @@ export default function inventoryReducer(state = initialState.inventories, actio
     case types.UPDATE_INVENTORY_SUCCESS:
       return [
         ...state.filter(inventory => inventory.inventoryId !== action.inventory.inventoryId),
-        Object.assign({}, action.inventoryId)
+        Object.assign({}, action.inventory)
       ];
 
     case types.CREATE_INVENTORY_SUCCESS:

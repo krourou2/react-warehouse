@@ -10,7 +10,7 @@ class CoursePage extends React.Component {
   //** CONSTRUCTOR INITIALIZES STATE AND CALLS BIND FUNCTIONS **//
   constructor(props, context){
     super(props, context);
-    this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind();
+    this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
   }
 
   redirectToAddCoursePage() {

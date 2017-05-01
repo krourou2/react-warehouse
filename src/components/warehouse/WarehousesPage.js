@@ -10,11 +10,11 @@ class WarehousesPage extends React.Component {
   //** CONSTRUCTOR INITIALIZES STATE AND CALLS BIND FUNCTIONS **//
   constructor(props, context){
     super(props, context);
-    this.redirectToAddWarehousePage = this.redirectToAddWarehousePage.bind();
+    this.redirectToAddWarehousePage = this.redirectToAddWarehousePage.bind(this);
   }
 
   redirectToAddWarehousePage() {
-    browserHistory.push('/warehouses');
+    browserHistory.push('/warehouse/manage/');
   }
 
   render() {

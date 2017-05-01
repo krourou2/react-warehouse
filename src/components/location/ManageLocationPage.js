@@ -42,7 +42,7 @@ class ManageLocationPage extends React.Component {
 
   redirect() {
     this.setState({saving: false});
-    this.context.router.push('/locations');
+    this.context.router.push('/locations/:' + this.props.warehouseId);
   }
 
   render() {
@@ -60,6 +60,7 @@ class ManageLocationPage extends React.Component {
 
 ManageLocationPage.propTypes = {
   location: PropTypes.object.isRequired,
+  warehouseId: PropTypes.string.isRequired,
   actions: PropTypes.object.isRequired
 };
 
@@ -68,23 +69,21 @@ ManageLocationPage.contextTypes = {
   router: PropTypes.object
 };
 
-function getLocationById(locations, id) {
-  const location = locations.filter(location => location.locationId == id);
-  if (location.length) return location[0]; //since filter returns an array, have to grab the first.
-  return null;
-}
-
 function mapStateToProps(state, ownProps) {
-  const locationId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
-
-  let location = {locationId: '', warehouseId: '', locationType: '', description: ''};
-
-  if (locationId && state.locations.length > 0) {
-    location = getLocationById(state.locations, locationId);
+  let locationId, location;
+  const warehouseId = ownProps.params.warehouseId.replace(":","");
+  console.log("MANAGE LOCATION PROPS WAREHOUSE ID", warehouseId);
+  if (ownProps.params.id) {
+    locationId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
+    location = state.locations.find(location => location.locationId === locationId);
+  } else {
+    locationId = parseInt(state.locations[state.locations.length - 1].locationId ) + 1;
+    location = {locationId: locationId.toString(), warehouseId: warehouseId, locationType: '', description: ''};
   }
 
   return {
-    location: location
+    location: location,
+    warehouseId: warehouseId
   };
 }
 

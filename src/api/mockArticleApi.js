@@ -71,7 +71,7 @@ class ArticleApi {
         }
 
         if (article.articleId) {
-          const existingCourseIndex = articles.findIndex(a => a.id == article.articleId);
+          const existingCourseIndex = articles.findIndex(a => a.articleId == article.articleId);
           articles.splice(existingCourseIndex, 1, article);
         } else {
           //Just simulating creation here.

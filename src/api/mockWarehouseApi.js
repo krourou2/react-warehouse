@@ -53,24 +53,24 @@ class WarehouseApi {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         //simulate server-side validation
-        const minWarehouseNameLength = 1;
-        if (warehouse.warehouseName.length < minWarehouseNameLength) {
-          reject(`Title must be at least ${minWarehouseNameLength} characters.`);
+        const minWarehouseNumberLength = 1;
+        if (warehouse.warehouseNumber.length < minWarehouseNumberLength) {
+          reject(`Title must be at least ${minWarehouseNumberLength} characters.`);
+        }
+
+        if (warehouse.warehouseId) {
+          const existingWarehouseIndex = warehouses.findIndex( a => a.warehouseId === warehouse.warehouseId);
+          warehouses.splice(existingWarehouseIndex, 1, warehouse);
         } else {
           //Just simulating creation here.
           //The server would generate ids and watchHref's for new courses in a real app.
           //Cloning so copy returned is passed by value rather than by reference.
+          console.log("SAVE WAREHOUSE API", warehouse);
           warehouse.warehouseId = generateId(warehouse);
           warehouses.push(warehouse);
         }
 
-
-
-        if (warehouse.warehouseId) {
-          const existingWarehouseIndex = warehouses.findIndex(a => a.warehouseId == warehouse.warehouseId);
-          warehouses.splice(existingWarehouseIndex, 1, warehouse);
-        }
-
+        resolve(warehouse);
       }, delay);
     });
   }

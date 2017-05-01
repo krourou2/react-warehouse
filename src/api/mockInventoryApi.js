@@ -52,8 +52,8 @@ class InventoryApi {
     inventory = Object.assign({}, inventory); // to avoid manipulating object passed in.
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-
-        if (inventory.id) {
+        const minInventoryIdLength = 1;
+        if (inventory.inventoryId < minInventoryIdLength) {
           const existingInventoryIndex = inventories.findIndex(a => a.inventoryId == inventory.inventoryId);
           inventories.splice(existingInventoryIndex, 1, inventory);
         } else {

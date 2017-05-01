@@ -7,7 +7,7 @@ import InventoryForm from './InventoryForm';
 class ManageInventoryPage extends React.Component {
   constructor(props, context) {
     super(props, context);
-
+    console.log("MNG INVENTORY CONSTRUCTOR", JSON.stringify(this.props.inventory));
     this.state = {
       inventory: Object.assign({}, this.props.inventory),
       errors: {},
@@ -18,26 +18,13 @@ class ManageInventoryPage extends React.Component {
     this.saveInventory = this.saveInventory.bind(this);
   }
 
-  // componentWillMount(){
-  //   const {inventory} = this.props;
-  //   console.log("CWM INVETORY", inventory);
-  //   if(inventory) this.setState({inventory});
-  // }
-
   // ran every once in a while to check if props have changed
   componentWillReceiveProps(nextProps) {
-    if (this.props.inventory && this.props.inventory.inventoryId != nextProps.inventory.inventoryId) {
+    if (this.props.inventory.inventoryId != nextProps.inventory.inventoryId) {
       // Necessary to populate form when existing course is loaded directly.
       this.setState({inventory: Object.assign({}, nextProps.inventory)});
     }
   }
-
-  // updateInventoryState(event) {
-  //   const {name, value} = event.target;
-  //   const inventory = Object.assign({}, this.state.inventory);
-  //   inventory[name] = value;
-  //   return this.setState({inventory});
-  // }
 
   updateInventoryState(event) {
     const field = event.target.name;
@@ -55,7 +42,7 @@ class ManageInventoryPage extends React.Component {
 
   redirect() {
     this.setState({saving: false});
-    this.context.router.push('/inventories');
+    this.context.router.push('warehouse/inventory/:' + this.props.warehouse.warehouseId);
   }
 
   render() {
@@ -63,7 +50,6 @@ class ManageInventoryPage extends React.Component {
       <InventoryForm
         inventory={this.state.inventory}
         allTags={this.props.tags}
-        allWarehouses={this.props.warehouseNumbers}
         onSave={this.saveInventory}
         onChange={this.updateInventoryState}
         saving={this.state.saving}
@@ -76,7 +62,7 @@ class ManageInventoryPage extends React.Component {
 ManageInventoryPage.propTypes = {
   inventory: PropTypes.object.isRequired,
   tags: PropTypes.array.isRequired,
-  warehouseNumbers: PropTypes.array.isRequired,
+  warehouse: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 };
 
@@ -85,17 +71,16 @@ ManageInventoryPage.contextTypes = {
   router: PropTypes.object
 };
 
-function getInventoryById(inventories, id) {
-  return inventories.find(inventory => inventory.inventoryId === id);
-}
-
 function mapStateToProps(state, ownProps) {
-  const inventoryId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
+  let inventoryId, inventory;
+  const warehouseId = ownProps.params.warehouseId.replace(":","");
 
-  let inventory = {inventoryId: '', warehouseId: '', articleId: '', locationTag: ''};
-
-  if (inventoryId && state.inventories.length > 0) {
-    inventory = getInventoryById(state.inventories, inventoryId);
+  if (ownProps.params.id) {
+    inventoryId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
+    inventory = state.inventories.find(inventory => inventory.inventoryId === inventoryId);
+  } else {
+    inventoryId = parseInt(state.inventories[state.inventories.length - 1].inventoryId ) + 1;
+    inventory = {inventoryId: inventoryId.toString(), warehouseId: warehouseId, articleId: '', locationTag: ''};
   }
 
   const locationTagsFormattedForDropdown = state.locations.map(location => {
@@ -105,20 +90,18 @@ function mapStateToProps(state, ownProps) {
     };
   });
 
-  // TEMPORARY "1001" accountId until mock user authentication is in place
-  const warehouseNumbersFormattedForDropdown = state.warehouses.filter(warehouse => warehouse.accountId === "1001").map( warehouse => {
+  const articleNamesFormattedForDropDown = state.articles.map(article => {
     return {
-      value: warehouse.warehouseId,
-      text: warehouse.warehouseNumber
+      value: article.articleId,
+      text: article.description
     };
   });
-
-  console.log("WNFFD", JSON.stringify(warehouseNumbersFormattedForDropdown));
 
   return {
     inventory: inventory,
     tags: locationTagsFormattedForDropdown,
-    warehouseNumbers: warehouseNumbersFormattedForDropdown
+    warehouse: state.warehouses.find(warehouse => warehouse.warehouseId === warehouseId),
+    articleNames: articleNamesFormattedForDropDown
   };
 }
 

@@ -7,16 +7,16 @@ const LocationForm = ({location, onSave, onChange, saving, errors}) => {
     <form>
       <h1>Manage Location</h1>
 
-      <TextInput
-        name="warehouseId"
-        label="Warehouse ID"
-        value={location.warehouseId}
-        onChange={onChange}
-        error={errors.warehouseId}
-        disabled={true}/>
+      {/*<TextInput*/}
+        {/*name="warehouseId"*/}
+        {/*label="Warehouse ID"*/}
+        {/*value={location.warehouseId}*/}
+        {/*onChange={onChange}*/}
+        {/*error={errors.warehouseId}*/}
+        {/*disabled={true}/>*/}
 
       <TextInput
-        name="locationTag"
+        name="tag"
         label="Location Tag"
         value={location.tag}
         onChange={onChange}

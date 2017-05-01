@@ -34,7 +34,6 @@ class ManageArticlePage extends React.Component {
   }
 
   saveArticle(event) {
-    console.log("STATE ARTICLE", this.state.article);
     event.preventDefault();
     this.setState({saving: true});
     this.props.actions.saveArticle(this.state.article)

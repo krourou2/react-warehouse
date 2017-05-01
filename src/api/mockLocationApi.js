@@ -68,9 +68,11 @@ class LocationApi {
           //Just simulating creation here.
           //The server would generate ids and watchHref's for new courses in a real app.
           //Cloning so copy returned is passed by value rather than by reference.
-          location.locationId(location);
+          location.locationId = generateId(location);
           locations.push(location);
         }
+
+        resolve(location);
       }, delay);
     });
   }
