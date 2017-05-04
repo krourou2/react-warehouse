@@ -1,5 +1,4 @@
 import React from 'react';
-import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
 const InventoryForm = ({inventory, allTags, onSave, onChange, saving, errors, articles}) => {
@@ -15,7 +14,8 @@ const InventoryForm = ({inventory, allTags, onSave, onChange, saving, errors, ar
         defaultOption="Select Article"
         options={articles}
         onChange={onChange}
-        error={errors.articleId} />
+        error={errors.articleId}
+        entityId={inventory.inventoryId}/>
 
       <SelectInput
         name="locationId"
@@ -42,9 +42,14 @@ InventoryForm.propTypes = {
   allTags: React.PropTypes.array,
   onSave: React.PropTypes.func.isRequired,
   onChange: React.PropTypes.func.isRequired,
+  articles: React.PropTypes.array.isRequired,
   saving: React.PropTypes.bool,
-  errors: React.PropTypes.object,
-  allWarehouses: React.PropTypes.array
+  errors: React.PropTypes.object
+};
+
+InventoryForm.defaultProps = {
+  saving: false,
+  error: {}
 };
 
 export default InventoryForm;

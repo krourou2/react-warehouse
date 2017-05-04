@@ -7,7 +7,7 @@ import InventoryForm from './InventoryForm';
 class ManageInventoryPage extends React.Component {
   constructor(props, context) {
     super(props, context);
-    console.log("MNG INVENTORY CONSTRUCTOR", JSON.stringify(this.props.inventory));
+
     this.state = {
       inventory: Object.assign({}, this.props.inventory),
       errors: {},
@@ -85,16 +85,14 @@ function mapStateToProps(state, ownProps) {
     inventory = {inventoryId: inventoryId.toString(), warehouseId: warehouseId, articleId: '', locationTag: ''};
   }
 
-  console.log("STATE LOCATIONS", state.locations);
   const locationsByWarehouse = state.locations.filter(location => location.warehouseId === warehouseId);
-  console.log("LOCATIONS BY WAREHOUSE", JSON.stringify(locationsByWarehouse));
+
   const locationTagsFormattedForDropdown = locationsByWarehouse.map(location => {
     return {
       value: location.locationId,
       text: location.tag
     };
   });
-  console.log("LOCATIONS BY WAREHOUSE FOR DROP DOWN", JSON.stringify(locationTagsFormattedForDropdown));
 
   //const articlesByAccount = state.articles.filter(article => article.accountId === state.activeUser.accountId);
   const articleNamesFormattedForDropDown = state.articles.filter(article => article.accountId === state.activeUser[0].accountId).map(article => {
@@ -103,7 +101,7 @@ function mapStateToProps(state, ownProps) {
       text: article.description
     };
   });
-  console.log("ARTICLES BY ACCOUNT FOR DROP DOWN", JSON.stringify(articleNamesFormattedForDropDown));
+
   return {
     inventory: inventory,
     tags: locationTagsFormattedForDropdown,
@@ -111,7 +109,6 @@ function mapStateToProps(state, ownProps) {
     articles: articleNamesFormattedForDropDown
   };
 }
-
 
 function mapDispatchToProps(dispatch) {
   return {

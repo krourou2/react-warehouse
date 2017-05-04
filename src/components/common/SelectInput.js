@@ -1,10 +1,8 @@
 import React, {PropTypes} from 'react';
 
 const SelectInput = ({name, label, onChange, defaultOption, value, error, options}) => {
-  const disabled  = (Number.parseInt(value) > 0 ? true : false);
-  const valueNum = Number.parseInt(value);
-  console.log("SELECT INPUT VALUE typeof ", typeof valueNum);
-  console.log("DISABLED: ", disabled);
+  const disabled  = Number.parseInt(value) > 0 && name === 'articleId';
+
   return (
     <div className="form-group">
       <label htmlFor={name}>{label}</label>
@@ -14,7 +12,8 @@ const SelectInput = ({name, label, onChange, defaultOption, value, error, option
             name={name}
             value={value}
             onChange={onChange}
-            className="form-control">
+            className="form-control"
+            disabled={disabled}>
             <option value="">{defaultOption}</option>
             {options.map((option) => {
               return <option key={option.value} value={option.value}>{option.text}</option>;
@@ -32,9 +31,17 @@ SelectInput.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   defaultOption: PropTypes.string,
+  inventories: PropTypes.array,
   value: PropTypes.string,
   error: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.object)
+};
+
+SelectInput.defaultProps = {
+  defaultOption: '',
+  value: '',
+  error: '',
+  options: [{}]
 };
 
 export default SelectInput;
