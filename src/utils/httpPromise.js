@@ -14,7 +14,6 @@ const HttpPromise = {
     POST(url, data) {
         return new Promise((resolve, reject) => {
            const config = new Configuration(url, POST, resolve, reject, data,
-               X_REQUESTED_WITH.XML_HTTP_REQUEST,
                CONTENT_TYPE.APPLICATION_X_WWW_FORM_URL_ENCODED);
             return new HttpRequest(config);
         });

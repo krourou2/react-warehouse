@@ -1,7 +1,10 @@
 import React, {PropTypes} from 'react';
 
 const SelectInput = ({name, label, onChange, defaultOption, value, error, options}) => {
-
+  const disabled  = (Number.parseInt(value) > 0 ? true : false);
+  const valueNum = Number.parseInt(value);
+  console.log("SELECT INPUT VALUE typeof ", typeof valueNum);
+  console.log("DISABLED: ", disabled);
   return (
     <div className="form-group">
       <label htmlFor={name}>{label}</label>

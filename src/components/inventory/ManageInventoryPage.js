@@ -54,6 +54,7 @@ class ManageInventoryPage extends React.Component {
         onChange={this.updateInventoryState}
         saving={this.state.saving}
         errors={this.state.errors}
+        articles={this.props.articles}
       />
     );
   }
@@ -63,7 +64,8 @@ ManageInventoryPage.propTypes = {
   inventory: PropTypes.object.isRequired,
   tags: PropTypes.array.isRequired,
   warehouse: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  articles: PropTypes.array.isRequired
 };
 
 //Pull in the React Router context so router is available on this.context.router
@@ -83,25 +85,30 @@ function mapStateToProps(state, ownProps) {
     inventory = {inventoryId: inventoryId.toString(), warehouseId: warehouseId, articleId: '', locationTag: ''};
   }
 
-  const locationTagsFormattedForDropdown = state.locations.map(location => {
+  console.log("STATE LOCATIONS", state.locations);
+  const locationsByWarehouse = state.locations.filter(location => location.warehouseId === warehouseId);
+  console.log("LOCATIONS BY WAREHOUSE", JSON.stringify(locationsByWarehouse));
+  const locationTagsFormattedForDropdown = locationsByWarehouse.map(location => {
     return {
       value: location.locationId,
       text: location.tag
     };
   });
+  console.log("LOCATIONS BY WAREHOUSE FOR DROP DOWN", JSON.stringify(locationTagsFormattedForDropdown));
 
-  const articleNamesFormattedForDropDown = state.articles.map(article => {
+  //const articlesByAccount = state.articles.filter(article => article.accountId === state.activeUser.accountId);
+  const articleNamesFormattedForDropDown = state.articles.filter(article => article.accountId === state.activeUser[0].accountId).map(article => {
     return {
       value: article.articleId,
       text: article.description
     };
   });
-
+  console.log("ARTICLES BY ACCOUNT FOR DROP DOWN", JSON.stringify(articleNamesFormattedForDropDown));
   return {
     inventory: inventory,
     tags: locationTagsFormattedForDropdown,
     warehouse: state.warehouses.find(warehouse => warehouse.warehouseId === warehouseId),
-    articleNames: articleNamesFormattedForDropDown
+    articles: articleNamesFormattedForDropDown
   };
 }
 

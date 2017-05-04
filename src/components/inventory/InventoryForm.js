@@ -2,19 +2,20 @@ import React from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const InventoryForm = ({inventory, allTags, onSave, onChange, saving, errors}) => {
+const InventoryForm = ({inventory, allTags, onSave, onChange, saving, errors, articles}) => {
 
   return (
     <form>
       <h1>Manage Inventory</h1>
 
-      <TextInput
+      <SelectInput
         name="articleId"
         label="Article ID"
         value={inventory.articleId}
+        defaultOption="Select Article"
+        options={articles}
         onChange={onChange}
-        error={errors.articleId}
-        disabled  />
+        error={errors.articleId} />
 
       <SelectInput
         name="locationId"
