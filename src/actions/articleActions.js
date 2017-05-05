@@ -15,6 +15,10 @@ export function createArticleSuccess(article) {
   return { type: types.CREATE_ARTICLE_SUCCESS, article};
 }
 
+export function deleteArticleSuccess(article) {
+  return { type: types.DELETE_ARTICLE_SUCCESS, article};
+}
+
 //** THUNKS AJAX CALLS **//
 //** GRABS ARTICLES FROM API END POINT **//
 export function loadArticles() {
@@ -39,15 +43,14 @@ export function saveArticle(article) {
   };
 }
 
-/*
-export function deleteArticle(article) {
-  return function (dispatch, getState) {
-    dispatch(beginAjaxCall());
-    return articleApi.deleteArticle(article).then(deletedArticle => {
+// export function deleteArticle(article) {
+//   return function (dispatch, getState) {
+//     dispatch(beginAjaxCall());
+//     return articleApi.deleteArticle(article).then(deletedArticle => {
+//
+//     }).catch(error => {
+//       throw(error);
+//     });
+//   };
+// }
 
-    }).catch(error => {
-      throw(error);
-    });
-  };
-}
-*/

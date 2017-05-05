@@ -16,6 +16,7 @@ class ManageCoursePage extends React.Component {
 
         this.updateCourseState = this.updateCourseState.bind(this);
         this.saveCourse = this.saveCourse.bind(this);
+        this.deleteCourse = this.deleteCourse.bind(this);
     }
 
     // ran every once in a while to check if props have changed
@@ -35,8 +36,15 @@ class ManageCoursePage extends React.Component {
 
     saveCourse(event) {
       event.preventDefault();
-      this.setState({saving: true});
+      this.setState({ saving: true });
       this.props.actions.saveCourse(this.state.course)
+        .then( () => this.redirect() );
+    }
+
+    deleteCourse(event) {
+      event.preventDefault();
+      this.setState({ saving: true });
+      this.props.actions.deleteCourse(this.state.course)
         .then( () => this.redirect() );
     }
 
@@ -51,6 +59,7 @@ class ManageCoursePage extends React.Component {
           allAuthors={this.props.authors}
           onChange={this.updateCourseState}
           onSave={this.saveCourse}
+          onDelete={this.deleteCourse}
           course={this.state.course}
           errors={this.state.errors}
           saving={this.state.saving}

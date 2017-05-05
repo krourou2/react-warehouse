@@ -9,7 +9,7 @@ const InventoryForm = ({inventory, allTags, onSave, onChange, saving, errors, ar
 
       <SelectInput
         name="articleId"
-        label="Article ID"
+        label="Article"
         value={inventory.articleId}
         defaultOption="Select Article"
         options={articles}

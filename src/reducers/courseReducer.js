@@ -18,6 +18,13 @@ export default function courseReducer(state = initialState.courses, action) {
         Object.assign({}, action.course)
       ];
 
+    case types.DELETE_COURSE_SUCCESS:
+      console.log("IN DELETE COURSE SUCCESS", action.course);
+      console.log("COURSE SUCCESS FILTER", state.filter(course => course.id !== action.course.id));
+      return [
+        ...state.filter(course => course.id !== action.course.id)
+      ];
+
     default:
       return state;
   }

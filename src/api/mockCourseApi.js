@@ -91,14 +91,17 @@ class CourseApi {
     });
   }
 
-  static deleteCourse(courseId) {
+  static deleteCourse(course) {
+    course = Object.assign({}, course);
+    console.log("IN DELETE COURSE, COURSEID", course);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const indexOfCourseToDelete = courses.findIndex(course => {
-          course.id == courseId;
-        });
+        const indexOfCourseToDelete = courses.findIndex(c => c.id == course.id);
+        const deletedCourse = Object.assign({}, courses.find(c => c.id === course.id));
         courses.splice(indexOfCourseToDelete, 1);
-        resolve();
+        console.log("SPLICED COURSES", courses);
+        console.log("DELETED COURSE", deletedCourse);
+        resolve(deletedCourse);
       }, delay);
     });
   }
