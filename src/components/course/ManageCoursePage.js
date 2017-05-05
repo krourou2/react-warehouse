@@ -79,32 +79,32 @@ ManageCoursePage.contextTypes = {
   router: PropTypes.object
 };
 
-function getCourseById(courses, id) {
-  const course = courses.filter(course => course.id == id);
-  if (course.length) return course[0]; //since filter returns an array, have to grab the first.
-  return null;
-}
-
 function mapStateToProps(state, ownProps) {
-    const courseId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
+  let courseId, course;
 
-    let course = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
+  console.log("MAP STATE TO PROPS PARAMS ID", ownProps.params.id.replace(":",""));
+  console.log("MAP STATE TO PROPS STATE>COURSES", state.courses);
 
-    if (courseId && state.courses.length > 0) {
-      course = getCourseById(state.courses, courseId);
-    }
+  if (ownProps.params.id && state.courses.find(course => course.id === ownProps.params.id.replace(":",""))) {
+    courseId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
+    course = state.courses.find(course => course.id === courseId);
+    console.log("MAP STATE TO PROPS COURSE", course);
+  } else {
+    courseId = 'a new javascript course';
+    course = {id: courseId, watchHref: '', title: '', authorId: '', length: '', category: ''};
+  }
 
-    const authorsFormattedForDropdown = state.authors.map(author => {
-      return {
-        value: author.id,
-        text: author.firstName + ' ' + author.lastName
-      };
-    });
-
+  const authorsFormattedForDropdown = state.authors.map(author => {
     return {
-        course: course,
-        authors: authorsFormattedForDropdown
+      value: author.id,
+      text: author.firstName + ' ' + author.lastName
     };
+  });
+
+  return {
+      course: course,
+      authors: authorsFormattedForDropdown
+  };
 }
 
 function mapDispatchToProps(dispatch) {
