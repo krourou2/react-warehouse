@@ -85,7 +85,7 @@ function mapStateToProps(state, ownProps) {
   console.log("MAP STATE TO PROPS PARAMS ID", ownProps.params.id.replace(":",""));
   console.log("MAP STATE TO PROPS STATE>COURSES", state.courses);
 
-  if (ownProps.params.id && state.courses.find(course => course.id === ownProps.params.id.replace(":",""))) {
+  if (state.courses.find(course => course.id === ownProps.params.id.replace(":",""))) {
     courseId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
     course = state.courses.find(course => course.id === courseId);
     console.log("MAP STATE TO PROPS COURSE", course);

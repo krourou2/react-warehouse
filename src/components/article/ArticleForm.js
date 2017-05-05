@@ -1,7 +1,7 @@
 import React from 'react';
 import TextInput from '../common/TextInput';
 
-const ArticleForm = ({article, onSave, onChange, saving, errors}) => {
+const ArticleForm = ({article, onSave, onDelete, onChange, saving, errors}) => {
   return (
     <form>
       <h1>Manage Article</h1>
@@ -35,6 +35,13 @@ const ArticleForm = ({article, onSave, onChange, saving, errors}) => {
         value={saving ? 'Saving...' : 'Save'}
         className="btn btn-primary"
         onClick={onSave}/>
+
+      <input
+        type="submit"
+        disabled={saving}
+        value={saving ? 'Deleting...' : 'Delete'}
+        className="btn btn-danger"
+        onClick={onDelete}/>
 
     </form>
   );

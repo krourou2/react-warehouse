@@ -16,6 +16,7 @@ class ManageArticlePage extends React.Component {
 
     this.updateArticleState = this.updateArticleState.bind(this);
     this.saveArticle = this.saveArticle.bind(this);
+    this.deleteArticle = this.deleteArticle.bind(this);
   }
 
   // ran every once in a while to check if props have changed
@@ -40,6 +41,13 @@ class ManageArticlePage extends React.Component {
       .then( () => this.redirect() );
   }
 
+  deleteArticle(event) {
+    event.preventDefault();
+    this.setState({ saving: true });
+    this.props.actions.deleteArticle(this.state.article)
+      .then( () => this.redirect() );
+  }
+
   redirect() {
     this.setState({saving: false});
     this.context.router.push('/articles');
@@ -50,6 +58,7 @@ class ManageArticlePage extends React.Component {
       <ArticleForm
         onChange={this.updateArticleState}
         onSave={this.saveArticle}
+        onDelete={this.deleteArticle}
         article={this.state.article}
         errors={this.state.errors}
         saving={this.state.saving}
@@ -68,20 +77,23 @@ ManageArticlePage.contextTypes = {
   router: PropTypes.object
 };
 
-function getArticleById(articles, id) {
-  const article = articles.filter(article => article.articleId == id);
-  if (article.length) return article[0]; //since filter returns an array, have to grab the first.
-  return null;
-}
+// function getArticleById(articles, id) {
+//   const article = articles.filter(article => article.articleId == id);
+//   if (article.length) return article[0]; //since filter returns an array, have to grab the first.
+//   return null;
+// }
 
 function mapStateToProps(state, ownProps) {
   let articleId, article;
 
-  console.log("MAX ARTICLE ID", parseInt(state.articles[state.articles.length - 1].articleId));
-  if (ownProps.params.id){
+  console.log("MANAGE ARTICLE PAGE MAP STATE TO PROPS", ownProps.params.id);
+
+  if (ownProps.params.id && state.articles.find(article => article.articleId === ownProps.params.id.replace(":",""))){
+    console.log("1");
     articleId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
     article = state.articles.find(article => article.articleId === articleId);
   } else {
+    console.log("2");
     articleId = parseInt(state.articles[state.articles.length - 1].articleId ) + 1;
     article = {articleId: articleId.toString(), accountId: state.activeUser[0].accountId, manufacturer: '', description: '', universalProductCode: ''};
   }

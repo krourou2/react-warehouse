@@ -43,14 +43,15 @@ export function saveArticle(article) {
   };
 }
 
-// export function deleteArticle(article) {
-//   return function (dispatch, getState) {
-//     dispatch(beginAjaxCall());
-//     return articleApi.deleteArticle(article).then(deletedArticle => {
-//
-//     }).catch(error => {
-//       throw(error);
-//     });
-//   };
-// }
+export function deleteArticle(article) {
+  console.log("ARTICLE ACTIONS DELETE ARTIICLE", article);
+  return function (dispatch, getState) {
+    dispatch(beginAjaxCall());
+    return articleApi.deleteArticle(article).then(deletedArticle => {
+      dispatch(deleteArticleSuccess(deletedArticle));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
 
