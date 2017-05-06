@@ -86,8 +86,6 @@ ManageArticlePage.contextTypes = {
 function mapStateToProps(state, ownProps) {
   let articleId, article;
 
-  console.log("MANAGE ARTICLE PAGE MAP STATE TO PROPS", ownProps.params.id);
-
   if (ownProps.params.id && state.articles.find(article => article.articleId === ownProps.params.id.replace(":",""))){
     console.log("1");
     articleId = ownProps.params.id.replace(":",""); // from the path '/course/:id'

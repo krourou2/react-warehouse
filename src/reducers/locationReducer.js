@@ -18,6 +18,11 @@ export default function locationReducer(state = initialState.locations, action) 
         Object.assign({}, action.location)
       ];
 
+    case types.DELETE_LOCATION_SUCCESS:
+      return [
+        ...state.filter(location => location.locationId !== action.location.locationId)
+      ];
+
     default:
       return state;
   }

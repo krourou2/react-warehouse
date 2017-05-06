@@ -77,14 +77,14 @@ class LocationApi {
     });
   }
 
-  static deleteLocation(locationId) {
+  static deleteLocation(location) {
+    Object.assign({}, location);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const indexOfLocationToDelete = locations.findIndex(location => {
-          location.locationId == locationId;
-        });
+        const indexOfLocationToDelete = locations.findIndex(location => location.locationId == location.locationId);
+        const deletedLocation = Object.assign({}, locations.find( l => l.locationId === location.locationId));
         locations.splice(indexOfLocationToDelete, 1);
-        resolve();
+        resolve(deletedLocation);
       }, delay);
     });
   }

@@ -16,6 +16,7 @@ class ManageWarehousePage extends React.Component {
 
     this.updateWarehouseState = this.updateWarehouseState.bind(this);
     this.saveWarehouse = this.saveWarehouse.bind(this);
+    this.deleteWarehouse = this.deleteWarehouse.bind(this);
   }
 
   // ran every once in a while to check if props have changed
@@ -41,6 +42,14 @@ class ManageWarehousePage extends React.Component {
       .then( () => this.redirect() );
   }
 
+  deleteWarehouse(event) {
+    event.preventDefault();
+    this.setState({ saving: true });
+
+    this.props.actions.deleteWarehouse(this.state.warehouse)
+      .then( () => this.redirect() );
+  }
+
   redirect() {
     this.setState({saving: false});
     this.context.router.push('/warehouses');
@@ -52,6 +61,7 @@ class ManageWarehousePage extends React.Component {
         onChange={this.updateWarehouseState}
         warehouse={this.state.warehouse}
         onSave={this.saveWarehouse}
+        onDelete={this.deleteWarehouse}
         errors={this.state.errors}
         saving={this.state.saving}
       />
@@ -73,7 +83,7 @@ function mapStateToProps(state, ownProps) {
   let warehouseId, warehouse;
 
   console.log("MAX WAREHOUSE ID", parseInt(state.warehouses[state.warehouses.length - 1].warehouseId));
-  if (ownProps.params.id){
+  if (ownProps.params.id && state.warehouses.find(warehouse => warehouse.warehouseId === ownProps.params.id.replace(":",""))){
     warehouseId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
     warehouse = state.warehouses.find(warehouse => warehouse.warehouseId === warehouseId);
   } else {

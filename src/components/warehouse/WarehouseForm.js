@@ -2,7 +2,7 @@ import React from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const WarehouseForm = ({warehouse, onSave, onChange, saving, errors}) => {
+const WarehouseForm = ({warehouse, onSave, onDelete, onChange, saving, errors}) => {
   return (
     <form>
       <h1>Manage Warehouse</h1>
@@ -27,6 +27,14 @@ const WarehouseForm = ({warehouse, onSave, onChange, saving, errors}) => {
         value={saving ? 'Saving...' : 'Save'}
         className="btn btn-primary"
         onClick={onSave}/>
+
+      <input
+        type="submit"
+        disabled={saving}
+        value={saving ? 'Deleting...' : 'Delete'}
+        className="btn btn-danger"
+        onClick={onDelete}/>
+
     </form>
   );
 };

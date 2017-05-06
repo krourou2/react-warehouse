@@ -69,6 +69,20 @@ class InventoryApi {
     });
   }
 
+  static deleteInventory(inventory) {
+    inventory = Object.assign({}, inventory);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const indexOfInventoryToDelete = inventories.findIndex(c => c.inventoryId == inventory.inventoryId);
+        const deletedInventory = Object.assign({}, inventories.find(c => c.inventoryId === inventory.inventoryId));
+        inventories.splice(indexOfInventoryToDelete, 1);
+        resolve(deletedInventory);
+      }, delay);
+    });
+  }
+
 }
+
+
 
 export default InventoryApi;

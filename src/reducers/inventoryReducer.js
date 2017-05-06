@@ -18,6 +18,11 @@ export default function inventoryReducer(state = initialState.inventories, actio
         Object.assign({}, action.inventory)
       ];
 
+    case types.DELETE_INVENTORY_SUCCESS:
+      return [
+        ...state.filter(inventory => inventory.inventoryId !== action.inventory.inventoryId)
+      ];
+
     default:
       return state;
   }

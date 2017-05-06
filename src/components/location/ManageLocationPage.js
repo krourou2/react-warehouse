@@ -16,6 +16,7 @@ class ManageLocationPage extends React.Component {
 
     this.updateLocationState = this.updateLocationState.bind(this);
     this.saveLocation = this.saveLocation.bind(this);
+    this.deleteLocation = this.deleteLocation.bind(this);
   }
 
   // ran every once in a while to check if props have changed
@@ -40,6 +41,13 @@ class ManageLocationPage extends React.Component {
       .then( () => this.redirect() );
   }
 
+  deleteLocation(event) {
+    event.preventDefault();
+    this.setState({ saving: true });
+    this.props.actions.deleteLocation(this.state.location)
+      .then( () => this.redirect() );
+  }
+
   redirect() {
     this.setState({saving: false});
     this.context.router.push('/locations/:' + this.props.warehouseId);
@@ -50,6 +58,7 @@ class ManageLocationPage extends React.Component {
       <LocationForm
         location={this.state.location}
         onSave={this.saveLocation}
+        onDelete={this.deleteLocation}
         onChange={this.updateLocationState}
         saving={this.state.saving}
         errors={this.state.errors}
@@ -72,8 +81,8 @@ ManageLocationPage.contextTypes = {
 function mapStateToProps(state, ownProps) {
   let locationId, location;
   const warehouseId = ownProps.params.warehouseId.replace(":","");
-  console.log("MANAGE LOCATION PROPS WAREHOUSE ID", warehouseId);
-  if (ownProps.params.id) {
+
+  if (ownProps.params.id && state.locations.find(location => location.locationId === ownProps.params.id.replace(":", ""))) {
     locationId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
     location = state.locations.find(location => location.locationId === locationId);
   } else {

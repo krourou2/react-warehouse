@@ -15,6 +15,10 @@ export function createInventorySuccess(inventory){
   return { type: types.CREATE_INVENTORY_SUCCESS, inventory: inventory};
 }
 
+export function deleteInventorySuccess(inventory) {
+  return { type: types.DELETE_INVENTORY_SUCCESS, inventory: inventory };
+}
+
 //** THUNKS AJAX CALLS **//
 //** GRABS COURSES FROM API END POINT **//
 export function loadInventories() {
@@ -34,6 +38,17 @@ export function saveInventory(inventory) {
     dispatch(beginAjaxCall());
     return inventoryApi.saveInventory(inventory).then( savedInventory => {
       inventory.inventoryId ? dispatch(updateInventorySuccess(savedInventory)) : dispatch(createInventorySuccess(savedInventory));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function deleteInventory(inventory) {
+  return function (dispatch, getState) {
+    dispatch(beginAjaxCall());
+    return inventoryApi.deleteInventory(inventory).then(deletedInventory => {
+      dispatch(deleteInventorySuccess(deletedInventory));
     }).catch(error => {
       throw(error);
     });

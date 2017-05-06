@@ -2,7 +2,7 @@ import React from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const LocationForm = ({location, onSave, onChange, saving, errors}) => {
+const LocationForm = ({location, onSave, onDelete, onChange, saving, errors}) => {
   return (
     <form>
       <h1>Manage Location</h1>
@@ -43,6 +43,13 @@ const LocationForm = ({location, onSave, onChange, saving, errors}) => {
         className="btn btn-primary"
         onChange={onChange}
         onClick={onSave}/>
+      <input
+        type="submit"
+        disabled={saving}
+        value={saving ? 'Deleting...' : 'Delete'}
+        className="btn btn-danger"
+        onClick={onDelete}/>
+
     </form>
   );
 };

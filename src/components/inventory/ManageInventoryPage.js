@@ -16,6 +16,7 @@ class ManageInventoryPage extends React.Component {
 
     this.updateInventoryState = this.updateInventoryState.bind(this);
     this.saveInventory = this.saveInventory.bind(this);
+    this.deleteInventory = this.deleteInventory.bind(this);
   }
 
   // ran every once in a while to check if props have changed
@@ -40,8 +41,18 @@ class ManageInventoryPage extends React.Component {
       .then( () => this.redirect() );
   }
 
+  deleteInventory(event) {
+    event.preventDefault();
+    this.setState({ saving: true });
+    console.log("IN DELETE INVENTORY", this.state.inventory);
+    this.props.actions.deleteInventory(this.state.inventory)
+      .then( () => this.redirect() );
+  }
+
   redirect() {
+    console.log("IN REDIRECT");
     this.setState({saving: false});
+    console.log("REDIRECT WAREHOUSE ID", this.props.warehouse.warehouseId);
     this.context.router.push('warehouse/inventory/:' + this.props.warehouse.warehouseId);
   }
 
@@ -51,6 +62,7 @@ class ManageInventoryPage extends React.Component {
         inventory={this.state.inventory}
         allTags={this.props.tags}
         onSave={this.saveInventory}
+        onDelete={this.deleteInventory}
         onChange={this.updateInventoryState}
         saving={this.state.saving}
         errors={this.state.errors}
@@ -76,8 +88,8 @@ ManageInventoryPage.contextTypes = {
 function mapStateToProps(state, ownProps) {
   let inventoryId, inventory;
   const warehouseId = ownProps.params.warehouseId.replace(":","");
-
-  if (ownProps.params.id) {
+  console.log("OWN PARAMS", ownProps);
+  if (ownProps.params.id && state.inventories.find(inventory => inventory.inventoryId === ownProps.params.id.replace(":", ""))) {
     inventoryId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
     inventory = state.inventories.find(inventory => inventory.inventoryId === inventoryId);
   } else {

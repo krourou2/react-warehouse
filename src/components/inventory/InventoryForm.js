@@ -1,7 +1,7 @@
 import React from 'react';
 import SelectInput from '../common/SelectInput';
 
-const InventoryForm = ({inventory, allTags, onSave, onChange, saving, errors, articles}) => {
+const InventoryForm = ({inventory, allTags, onSave, onDelete, onChange, saving, errors, articles}) => {
 
   return (
     <form>
@@ -33,6 +33,14 @@ const InventoryForm = ({inventory, allTags, onSave, onChange, saving, errors, ar
         className="btn btn-primary"
         onChange={onChange}
         onClick={onSave}/>
+
+      <input
+        type="submit"
+        disabled={saving}
+        value={saving ? 'Deleting...' : 'Delete'}
+        className="btn btn-danger"
+        onClick={onDelete}/>
+
     </form>
   );
 };
