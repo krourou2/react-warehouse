@@ -4,15 +4,19 @@ import {beginAjaxCall} from './ajaxStatusActions';
 
 //** ACTION CREATOR **//
 export function loadWarehouseSuccess(warehouses) {
-  return { type: types.LOAD_WAREHOUSES_SUCCESS, warehouses: warehouses};
+  return { type: types.LOAD_WAREHOUSES_SUCCESS, warehouses: warehouses };
 }
 
-export function updateWarehousesSuccess(warehouse){
-  return { type: types.UPDATE_WAREHOUSE_SUCCESS, warehouse: warehouse};
+export function updateWarehousesSuccess(warehouse) {
+  return { type: types.UPDATE_WAREHOUSE_SUCCESS, warehouse: warehouse };
 }
 
-export function createWarehouseSuccess(warehouse){
-  return { type: types.CREATE_WAREHOUSE_SUCCESS, warehouse: warehouse};
+export function createWarehouseSuccess(warehouse) {
+  return { type: types.CREATE_WAREHOUSE_SUCCESS, warehouse: warehouse };
+}
+
+export function deleteWarehouseSuccess(warehouse) {
+  return { type: types.DELETE_WAREHOUSE_SUCCESS, warehouse };
 }
 
 //** THUNKS AJAX CALLS **//
@@ -33,6 +37,17 @@ export function saveWarehouse(warehouse) {
     dispatch(beginAjaxCall());
     return warehouseApi.saveWarehouse(warehouse).then( savedWarehouse => {
       warehouse.warehouseId ? dispatch(updateWarehousesSuccess(savedWarehouse)) : dispatch(createWarehouseSuccess(savedWarehouse));
+    });
+  };
+}
+
+export function deleteWarehouse(warehouse) {
+  return function (dispatch, getState) {
+    dispatch(beginAjaxCall());
+    return warehouseApi.deleteWarehouse(warehouse).then(deletedWarehouse => {
+      dispatch(deleteWarehouseSuccess(deletedWarehouse));
+    }).catch(error => {
+      throw(error);
     });
   };
 }

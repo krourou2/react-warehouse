@@ -26,15 +26,15 @@ const generateId = (user) => {
 class UserApi {
   static getAllUsers() {
     console.log("USER PROXY", UserProxy);
-    // return UserProxy.Get().then(response => {
-    //   console.log("response", JSON.stringify(response));
-    //   return response;
-    // });
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(Object.assign([], users));
-      }, delay);
+    return UserProxy.Get().then(response => {
+      console.log("response", JSON.stringify(response));
+      return response;
     });
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve(Object.assign([], users));
+    //   }, delay);
+    // });
   }
 
   static saveUser(user) {

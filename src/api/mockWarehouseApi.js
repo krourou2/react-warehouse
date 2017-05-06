@@ -1,4 +1,5 @@
 import delay from './delay';
+import WarehouseProxy from '../service/warehouseProxy';
 
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
@@ -41,11 +42,16 @@ const generateId = (warehouse) => {
 
 class WarehouseApi {
   static getAllWarehouses() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(Object.assign([], warehouses));
-      }, delay);
+    console.log("WAREHOUSE PROXY", WarehouseProxy);
+    return WarehouseProxy.Get().then(response => {
+      console.log("response", JSON.stringify(response));
+      return response;
     });
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve(Object.assign([], warehouses));
+    //   }, delay);
+    // });
   }
 
   static saveWarehouse(warehouse) {
@@ -74,6 +80,19 @@ class WarehouseApi {
       }, delay);
     });
   }
+
+  static deleteWarehouse(warehouse) {
+    warehouse = Object.assign({}, warehouse);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const indexOfWarehouseToDelete = warehouses.findIndex(c => c.warehouseId === warehouse.warehouseId);
+        const deletedWarehouse = Object.assign({}, warehouses.find(c => c.warehouseId === warehouse.warehouseId));
+        warehouses.splice(indexOfWarehouseToDelete, 1);
+        resolve(deletedWarehouse);
+      }, delay);
+    });
+  }
+
 }
 
 export default WarehouseApi;

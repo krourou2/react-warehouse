@@ -44,7 +44,6 @@ export function saveArticle(article) {
 }
 
 export function deleteArticle(article) {
-  console.log("ARTICLE ACTIONS DELETE ARTIICLE", article);
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
     return articleApi.deleteArticle(article).then(deletedArticle => {

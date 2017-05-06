@@ -18,6 +18,11 @@ export default function warehouseReducer(state = initialState.warehouses, action
         Object.assign({}, action.warehouse)
       ];
 
+    case types.DELETE_WAREHOUSE_SUCCESS:
+      return [
+        ...state.filter(warehouse => warehouse.warehouseId !== action.warehouse.warehouseId)
+      ];
+
     default:
       return state;
   }

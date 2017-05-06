@@ -37,15 +37,15 @@ const generateId = (inventory) => {
 class InventoryApi {
   static getAllInventories() {
     console.log("INVENTORY PROXY", InventoryProxy);
-    // return InventoryProxy.Get().then(response => {
-    //   console.log("response", JSON.stringify(response));
-    //   return response;
-    // });
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(Object.assign([], inventories));
-      }, delay);
+    return InventoryProxy.Get().then(response => {
+      console.log("response", JSON.stringify(response));
+      return response;
     });
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve(Object.assign([], inventories));
+    //   }, delay);
+    // });
   }
 
   static saveInventory(inventory) {

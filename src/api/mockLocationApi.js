@@ -40,15 +40,15 @@ const generateId = (location) => {
 class LocationApi {
   static getAllLocations() {
     console.log("LOCATION PROXY", LocationProxy);
-    // return LocationProxy.Get().then(response => {
-    //   console.log("response", JSON.stringify(response));
-    //   return response;
-    // });
-    return new Promise((resolve, reject) => {
-     setTimeout(() => {
-       resolve(Object.assign([], locations));
-     }, delay);
+    return LocationProxy.Get().then(response => {
+      console.log("response", JSON.stringify(response));
+      return response;
     });
+    // return new Promise((resolve, reject) => {
+    //  setTimeout(() => {
+    //    resolve(Object.assign([], locations));
+    //  }, delay);
+    // });
   }
 
   static saveLocation(location) {
