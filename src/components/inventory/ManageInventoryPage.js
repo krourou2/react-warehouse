@@ -44,21 +44,19 @@ class ManageInventoryPage extends React.Component {
   deleteInventory(event) {
     event.preventDefault();
     this.setState({ saving: true });
-    console.log("IN DELETE INVENTORY", this.state.inventory);
     this.props.actions.deleteInventory(this.state.inventory)
       .then( () => this.redirect() );
   }
 
   redirect() {
-    console.log("IN REDIRECT");
     this.setState({saving: false});
-    console.log("REDIRECT WAREHOUSE ID", this.props.warehouse.warehouseId);
     this.context.router.push('warehouse/inventory/:' + this.props.warehouse.warehouseId);
   }
 
   render() {
     return (
       <InventoryForm
+        newInventoryPiece={this.props.newInventoryPiece}
         inventory={this.state.inventory}
         allTags={this.props.tags}
         onSave={this.saveInventory}
@@ -73,6 +71,7 @@ class ManageInventoryPage extends React.Component {
 }
 
 ManageInventoryPage.propTypes = {
+  newInventoryPiece: PropTypes.bool.isRequired,
   inventory: PropTypes.object.isRequired,
   tags: PropTypes.array.isRequired,
   warehouse: PropTypes.object.isRequired,
@@ -86,13 +85,15 @@ ManageInventoryPage.contextTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-  let inventoryId, inventory;
+  let inventoryId, inventory, newInventoryPiece;
   const warehouseId = ownProps.params.warehouseId.replace(":","");
-  console.log("OWN PARAMS", ownProps);
+
   if (ownProps.params.id && state.inventories.find(inventory => inventory.inventoryId === ownProps.params.id.replace(":", ""))) {
+    newInventoryPiece = false;
     inventoryId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
     inventory = state.inventories.find(inventory => inventory.inventoryId === inventoryId);
   } else {
+    newInventoryPiece = true;
     inventoryId = parseInt(state.inventories[state.inventories.length - 1].inventoryId ) + 1;
     inventory = {inventoryId: inventoryId.toString(), warehouseId: warehouseId, articleId: '', locationTag: ''};
   }
@@ -115,6 +116,7 @@ function mapStateToProps(state, ownProps) {
   });
 
   return {
+    newInventoryPiece: newInventoryPiece,
     inventory: inventory,
     tags: locationTagsFormattedForDropdown,
     warehouse: state.warehouses.find(warehouse => warehouse.warehouseId === warehouseId),

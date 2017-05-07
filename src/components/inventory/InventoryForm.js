@@ -1,7 +1,7 @@
 import React from 'react';
 import SelectInput from '../common/SelectInput';
 
-const InventoryForm = ({inventory, allTags, onSave, onDelete, onChange, saving, errors, articles}) => {
+const InventoryForm = ({newInventoryPiece, inventory, allTags, onSave, onDelete, onChange, saving, errors, articles}) => {
 
   return (
     <form>
@@ -15,7 +15,8 @@ const InventoryForm = ({inventory, allTags, onSave, onDelete, onChange, saving, 
         options={articles}
         onChange={onChange}
         error={errors.articleId}
-        entityId={inventory.inventoryId}/>
+        entityId={inventory.inventoryId}
+        newInventoryPiece={newInventoryPiece}/>
 
       <SelectInput
         name="locationId"
@@ -46,9 +47,11 @@ const InventoryForm = ({inventory, allTags, onSave, onDelete, onChange, saving, 
 };
 
 InventoryForm.propTypes = {
+  newInventoryPiece: React.PropTypes.bool.isRequired,
   inventory: React.PropTypes.object.isRequired,
   allTags: React.PropTypes.array,
   onSave: React.PropTypes.func.isRequired,
+  onDelete: React.PropTypes.func.isRequired,
   onChange: React.PropTypes.func.isRequired,
   articles: React.PropTypes.array.isRequired,
   saving: React.PropTypes.bool,

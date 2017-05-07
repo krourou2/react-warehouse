@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 
-const SelectInput = ({name, label, onChange, defaultOption, value, error, options}) => {
-  const disabled  = Number.parseInt(value) > 0 && name === 'articleId';
+const SelectInput = ({name, label, onChange, defaultOption, value, error, options, newInventoryPiece}) => {
+  const disabled = Number.parseInt(value) > 0 && name === 'articleId' && !newInventoryPiece;
 
   return (
     <div className="form-group">
@@ -30,6 +30,7 @@ SelectInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  newInventoryPiece: PropTypes.bool,
   defaultOption: PropTypes.string,
   inventories: PropTypes.array,
   value: PropTypes.string,
@@ -38,6 +39,7 @@ SelectInput.propTypes = {
 };
 
 SelectInput.defaultProps = {
+  newInventoryPiece: false,
   defaultOption: '',
   value: '',
   error: '',
