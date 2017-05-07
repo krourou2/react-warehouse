@@ -44,8 +44,16 @@ class ManageArticlePage extends React.Component {
   deleteArticle(event) {
     event.preventDefault();
     this.setState({ saving: true });
-    this.props.actions.deleteArticle(this.state.article)
-      .then( () => this.redirect() );
+    if( this.props.newArticle === true ) {
+      alert("Cannot delete a new article before it is saved.");
+      this.setState({ saving: false });
+    } else if ( this.props.isInventory === true ) {
+      alert("Cannot delete while inventory of this article exist.");
+      this.setState({ saving: false });
+    } else {
+      this.props.actions.deleteArticle(this.state.article)
+        .then( () => this.redirect() );
+    }
   }
 
   redirect() {
@@ -69,6 +77,8 @@ class ManageArticlePage extends React.Component {
 
 ManageArticlePage.propTypes = {
   article: PropTypes.object.isRequired,
+  newArticle: PropTypes.bool.isRequired,
+  isInventory: PropTypes.bool.isRequired,
   actions: PropTypes.object.isRequired
 };
 
@@ -77,27 +87,25 @@ ManageArticlePage.contextTypes = {
   router: PropTypes.object
 };
 
-// function getArticleById(articles, id) {
-//   const article = articles.filter(article => article.articleId == id);
-//   if (article.length) return article[0]; //since filter returns an array, have to grab the first.
-//   return null;
-// }
-
 function mapStateToProps(state, ownProps) {
-  let articleId, article;
+  let articleId, article, newArticle, isInventory;
 
   if (ownProps.params.id && state.articles.find(article => article.articleId === ownProps.params.id.replace(":",""))){
-    console.log("1");
+    newArticle = false;
     articleId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
     article = state.articles.find(article => article.articleId === articleId);
   } else {
-    console.log("2");
+    newArticle = true;
     articleId = parseInt(state.articles[state.articles.length - 1].articleId ) + 1;
     article = {articleId: articleId.toString(), accountId: state.activeUser[0].accountId, manufacturer: '', description: '', universalProductCode: ''};
   }
 
+  isInventory = state.inventories.filter(inventory => inventory.articleId === article.articleId).length > 0;
+
   return {
-    article: article
+    article: article,
+    newArticle: newArticle,
+    isInventory: isInventory
   };
 }
 

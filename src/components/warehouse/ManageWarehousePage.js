@@ -101,8 +101,7 @@ function mapStateToProps(state, ownProps) {
   }
 
   hasInventory = state.locations.filter(location => state.inventories.filter(inventory => inventory.locationId === location.locationId)).length > 0;
-  console.log("MANAGE WAREHOUSE MAP STATE TO PROPS NEW WAREHOUSE", newWarehouse);
-  console.log("MANAGE WAREHOUSE MAP STATE TO PROPS HAS INVENTORY", hasInventory);
+
   return {
     warehouse: warehouse,
     newWarehouse: newWarehouse,
