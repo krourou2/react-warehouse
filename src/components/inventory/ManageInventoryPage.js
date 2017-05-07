@@ -44,8 +44,13 @@ class ManageInventoryPage extends React.Component {
   deleteInventory(event) {
     event.preventDefault();
     this.setState({ saving: true });
-    this.props.actions.deleteInventory(this.state.inventory)
-      .then( () => this.redirect() );
+    if (this.props.newInventoryPiece === false) {
+      this.props.actions.deleteInventory(this.state.inventory)
+        .then( () => this.redirect() );
+    } else {
+      alert("Cannot delete inventory that has not been created yet.");
+      this.setState({ saving: false });
+    }
   }
 
   redirect() {

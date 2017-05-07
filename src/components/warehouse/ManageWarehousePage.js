@@ -35,7 +35,6 @@ class ManageWarehousePage extends React.Component {
   }
 
   saveWarehouse(event) {
-    console.log("SAVE WAREHOUSE", this.state.warehouse);
     event.preventDefault();
     this.setState({saving: true});
     this.props.actions.saveWarehouse(this.state.warehouse)
@@ -45,9 +44,16 @@ class ManageWarehousePage extends React.Component {
   deleteWarehouse(event) {
     event.preventDefault();
     this.setState({ saving: true });
-
-    this.props.actions.deleteWarehouse(this.state.warehouse)
-      .then( () => this.redirect() );
+    if ( this.props.newWarehouse === true ) {
+      alert("Cannot delete a new warehouse before it is saved.");
+      this.setState({ saving: false });
+    } else if ( this.props.hasInventory === true ) {
+      alert("Cannot delete a warehouse if it contains inventory.");
+      this.setState({ saving: false });
+    } else {
+      this.props.actions.deleteWarehouse(this.state.warehouse)
+        .then( () => this.redirect() );
+    }
   }
 
   redirect() {
@@ -71,7 +77,9 @@ class ManageWarehousePage extends React.Component {
 
 ManageWarehousePage.propTypes = {
   warehouse: React.PropTypes.object.isRequired,
-  actions: React.PropTypes.object.isRequired
+  actions: React.PropTypes.object.isRequired,
+  newWarehouse: React.PropTypes.bool.isRequired,
+  hasInventory: React.PropTypes.bool.isRequired
 };
 
 //Pull in the React Router context so router is available on this.context.router
@@ -80,19 +88,25 @@ ManageWarehousePage.contextTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-  let warehouseId, warehouse;
+  let warehouseId, warehouse, newWarehouse, hasInventory;
 
-  console.log("MAX WAREHOUSE ID", parseInt(state.warehouses[state.warehouses.length - 1].warehouseId));
   if (ownProps.params.id && state.warehouses.find(warehouse => warehouse.warehouseId === ownProps.params.id.replace(":",""))){
+    newWarehouse = false;
     warehouseId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
     warehouse = state.warehouses.find(warehouse => warehouse.warehouseId === warehouseId);
   } else {
+    newWarehouse = true;
     warehouseId = parseInt(state.warehouses[state.warehouses.length - 1].warehouseId ) + 1;
     warehouse = {warehouseId: '', accountId: '', warehouseNumber: '', warehouseName: ''};
   }
 
+  hasInventory = state.locations.filter(location => state.inventories.filter(inventory => inventory.locationId === location.locationId)).length > 0;
+  console.log("MANAGE WAREHOUSE MAP STATE TO PROPS NEW WAREHOUSE", newWarehouse);
+  console.log("MANAGE WAREHOUSE MAP STATE TO PROPS HAS INVENTORY", hasInventory);
   return {
-    warehouse: warehouse
+    warehouse: warehouse,
+    newWarehouse: newWarehouse,
+    hasInventory: hasInventory
   };
 }
 

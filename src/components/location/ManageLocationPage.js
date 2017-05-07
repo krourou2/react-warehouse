@@ -44,8 +44,16 @@ class ManageLocationPage extends React.Component {
   deleteLocation(event) {
     event.preventDefault();
     this.setState({ saving: true });
-    this.props.actions.deleteLocation(this.state.location)
-      .then( () => this.redirect() );
+    if ( this.props.newLocation === true ) {
+      alert("Cannot delete unsaved location.");
+      this.setState({ saving: false });
+    } else if ( this.props.hasInventory === true ) {
+      alert("Cannot delete location with active inventory.");
+      this.setState({ saving: false });
+    } else {
+      this.props.actions.deleteLocation(this.state.location)
+        .then( () => this.redirect() );
+    }
   }
 
   redirect() {
@@ -70,7 +78,9 @@ class ManageLocationPage extends React.Component {
 ManageLocationPage.propTypes = {
   location: PropTypes.object.isRequired,
   warehouseId: PropTypes.string.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  newLocation: PropTypes.bool.isRequired,
+  hasInventory: PropTypes.bool.isRequired
 };
 
 //Pull in the React Router context so router is available on this.context.router
@@ -79,20 +89,26 @@ ManageLocationPage.contextTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-  let locationId, location;
+  let locationId, location, newLocation, hasInventory;
   const warehouseId = ownProps.params.warehouseId.replace(":","");
 
   if (ownProps.params.id && state.locations.find(location => location.locationId === ownProps.params.id.replace(":", ""))) {
+    newLocation = false;
     locationId = ownProps.params.id.replace(":",""); // from the path '/course/:id'
     location = state.locations.find(location => location.locationId === locationId);
   } else {
+    newLocation = true;
     locationId = parseInt(state.locations[state.locations.length - 1].locationId ) + 1;
     location = {locationId: locationId.toString(), warehouseId: warehouseId, locationType: '', description: ''};
   }
 
+  hasInventory = state.inventories.filter(inventory => inventory.locationId === location.locationId).length > 0;
+
   return {
     location: location,
-    warehouseId: warehouseId
+    warehouseId: warehouseId,
+    newLocation: newLocation,
+    hasInventory: hasInventory
   };
 }
 
