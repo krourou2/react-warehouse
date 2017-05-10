@@ -37,6 +37,7 @@ class ManageWarehousePage extends React.Component {
   saveWarehouse(event) {
     event.preventDefault();
     this.setState({saving: true});
+    console.log("SAVE WAREHOUSE", this.state.warehouse);
     this.props.actions.saveWarehouse(this.state.warehouse)
       .then( () => this.redirect() );
   }
@@ -48,7 +49,7 @@ class ManageWarehousePage extends React.Component {
       alert("Cannot delete a new warehouse before it is saved.");
       this.setState({ saving: false });
     } else if ( this.props.hasInventory === true ) {
-      alert("Cannot delete a warehouse if it contains inventory.");
+      alert("Cannot delete warehouse with active inventory.");
       this.setState({ saving: false });
     } else {
       this.props.actions.deleteWarehouse(this.state.warehouse)
@@ -97,7 +98,7 @@ function mapStateToProps(state, ownProps) {
   } else {
     newWarehouse = true;
     warehouseId = parseInt(state.warehouses[state.warehouses.length - 1].warehouseId ) + 1;
-    warehouse = {warehouseId: '', accountId: '', warehouseNumber: '', warehouseName: ''};
+    warehouse = {warehouseId: warehouseId.toString(), accountId: state.activeUser[0].accountId, warehouseNumber: '', warehouseName: ''};
   }
 
   hasInventory = state.locations.filter(location => state.inventories.filter(inventory => inventory.locationId === location.locationId)).length > 0;

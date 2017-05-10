@@ -36,6 +36,7 @@ export function saveWarehouse(warehouse) {
   return function (dispatch, getstate) {
     dispatch(beginAjaxCall());
     return warehouseApi.saveWarehouse(warehouse).then( savedWarehouse => {
+      console.log("WAREHOUSE ACTION SAVE WAREHOUSE", warehouse);
       warehouse.warehouseId ? dispatch(updateWarehousesSuccess(savedWarehouse)) : dispatch(createWarehouseSuccess(savedWarehouse));
     });
   };

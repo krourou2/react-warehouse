@@ -11,9 +11,14 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className="jumbotron">
-        <h1>SCC Warehouse</h1>
-        <p>Web Based Inventory Management System.</p>
+      <div className="jumbotron row">
+        <div className="col-lg-8">
+          <h1>SCC Warehouse</h1>
+          <p>Web Based Inventory Management System.</p>
+        </div>
+        <div className="col-lg-4">
+          {/*<img alt="SCC WAREHOUSE LOGO" src={require('src/images/logo1.png')}/>*/}
+        </div>
         <Link to="about" className="btn btn-primary btn-lg" >Learn More</Link>
       </div>
     );

@@ -48,7 +48,7 @@ class ManageArticlePage extends React.Component {
       alert("Cannot delete a new article before it is saved.");
       this.setState({ saving: false });
     } else if ( this.props.isInventory === true ) {
-      alert("Cannot delete while inventory of this article exist.");
+      alert("Cannot delete article with active inventory.");
       this.setState({ saving: false });
     } else {
       this.props.actions.deleteArticle(this.state.article)
